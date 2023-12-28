@@ -1,6 +1,6 @@
 {
     "name": "fenextjs-validator",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "description": "",
     "main": "./cjs/index.js",
     "module": "./cjs/index.js",
@@ -26,7 +26,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://gitlab.com/franciscoblancojn/fenextjs-validator.git"
+        "url": "git+https://github.com/franciscoblancojn/fenextjs-validator.git"
     },
     "keywords": [
         "fenextjs",
@@ -36,9 +36,9 @@
     "author": "franciscoblancojn",
     "license": "ISC",
     "bugs": {
-        "url": "https://gitlab.com/franciscoblancojn/fenextjs-validator/issues"
+        "url": "https://github.com/franciscoblancojn/fenextjs-validator/issues"
     },
-    "homepage": "https://gitlab.com/franciscoblancojn/fenextjs-validator#readme",
+    "homepage": "https://github.com/franciscoblancojn/fenextjs-validator#readme",
     "dependencies": {
         "fenextjs-error": "^1.0.14",
         "fenextjs-interface": "^1.2.0"

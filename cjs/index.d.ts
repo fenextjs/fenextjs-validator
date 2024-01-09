@@ -96,35 +96,35 @@ export declare class FenextjsValidatorClass<T = any> {
      * @param item - Instancia de FenextjsValidatorClass que define las reglas de validación para cada elemento del array.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isArray(item?: FenextjsValidatorClass | undefined): this;
+    isArray(item?: FenextjsValidatorClass | undefined, msg?: string): this;
     /**
      * Método para habilitar la validación "isMin".
      * Establece la regla de que los datos deben ser mayores que un valor específico.
      * @param min - Valor mínimo que los datos deben superar.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isMin(min: number | Date): this;
+    isMin(min: number | Date, msg?: string): this;
     /**
      * Método para habilitar la validación "isMinOrEqual".
      * Establece la regla de que los datos deben ser mayores o iguales que un valor específico.
      * @param min - Valor mínimo que los datos deben superar o igualar.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isMinOrEqual(min: number | Date): this;
+    isMinOrEqual(min: number | Date, msg?: string): this;
     /**
      * Método para habilitar la validación "isMax".
      * Establece la regla de que los datos deben ser menores que un valor específico.
      * @param max - Valor máximo que los datos deben ser menores que él.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isMax(max: number | Date): this;
+    isMax(max: number | Date, msg?: string): this;
     /**
      * Método para habilitar la validación "isMaxOrEqual".
      * Establece la regla de que los datos deben ser menores o iguales que un valor específico.
      * @param max - Valor máximo que los datos deben ser menores o igual que él.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isMaxOrEqual(max: number | Date): this;
+    isMaxOrEqual(max: number | Date, msg?: string): this;
     /**
      * Método para habilitar la comparación de valores de referencia.
      * Establece la regla de que los datos deben ser iguales a otro valor de referencia almacenado en la instancia.
@@ -132,7 +132,7 @@ export declare class FenextjsValidatorClass<T = any> {
      * @param {string} refKey - La clave que identifica el valor de referencia almacenado en la instancia para la comparación.
      * @returns {FenextjsValidatorClass} - La instancia actual de la clase FenextjsValidatorClass, lo que permite el encadenamiento de métodos.
      */
-    isCompareRef(refKey: string): this;
+    isCompareRef(refKey: string, msg?: string): this;
     /**
      * Método para obtener la comparación de valores de referencia.
      *
@@ -162,13 +162,13 @@ export declare class FenextjsValidatorClass<T = any> {
      * Establece la regla de que los comparacion cuando sea correcto la validacion.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isRegex(data: RegExp): this;
+    isRegex(data: RegExp, msg?: string): this;
     /**
      * Método para habilitar la validación "isEmail".
      * Establece la regla de que los comparacion cuando sea correcto la validacion.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isEmail(): this;
+    isEmail(msg?: string): this;
     /**
      * Método para validar los datos proporcionados según las reglas establecidas.
      * Ejecuta todas las reglas de validación habilitadas previamente para los datos.

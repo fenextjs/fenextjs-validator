@@ -117,7 +117,10 @@ export class FenextjsValidatorClass<T = any> {
             | "isMin"
             | "isMinOrEqual"
             | "isMax"
-            | "isMaxOrEqual"|'isCompareRef'|'isRegex'|'isEmail']?: string | undefined;
+            | "isMaxOrEqual"
+            | "isCompareRef"
+            | "isRegex"
+            | "isEmail"]?: string | undefined;
     } = {};
 
     /**
@@ -626,7 +629,7 @@ export class FenextjsValidatorClass<T = any> {
      * @param max - Valor máximo que los datos deben ser menores o igual que él.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isMaxOrEqual(max: number | Date,msg?:string) {
+    isMaxOrEqual(max: number | Date, msg?: string) {
         this.#maxOrEqual = true;
         this.#maxValue = max;
         this.#messageError.isMaxOrEqual = msg;
@@ -669,7 +672,10 @@ export class FenextjsValidatorClass<T = any> {
                 maxValidate < nMaxValue
             )
         ) {
-            this.#onError(ErrorCode.INPUT_VALUE_TOO_HIGH,this.#messageError?.isMax);
+            this.#onError(
+                ErrorCode.INPUT_VALUE_TOO_HIGH,
+                this.#messageError?.isMax,
+            );
         }
 
         // Verifica si se habilitó la regla "isMaxOrEqual" y si los datos no son menores o iguales al valor máximo (#maxValue).
@@ -682,7 +688,10 @@ export class FenextjsValidatorClass<T = any> {
                 maxValidate <= nMaxValue
             )
         ) {
-            this.#onError(ErrorCode.INPUT_VALUE_TOO_HIGH,this.#messageError?.isMaxOrEqual);
+            this.#onError(
+                ErrorCode.INPUT_VALUE_TOO_HIGH,
+                this.#messageError?.isMaxOrEqual,
+            );
         }
     }
     /**
@@ -692,7 +701,7 @@ export class FenextjsValidatorClass<T = any> {
      * @param {string} refKey - La clave que identifica el valor de referencia almacenado en la instancia para la comparación.
      * @returns {FenextjsValidatorClass} - La instancia actual de la clase FenextjsValidatorClass, lo que permite el encadenamiento de métodos.
      */
-    isCompareRef(refKey: string,msg?:string) {
+    isCompareRef(refKey: string, msg?: string) {
         this.#compareRef = true;
         this.#compareRefKey = refKey;
         this.#messageError.isCompareRef = msg;
@@ -733,7 +742,10 @@ export class FenextjsValidatorClass<T = any> {
 
         if (this.#compareRefValue !== this.#data) {
             // Lanza una excepción "ErrorInputInvalid" con el código "ErrorCode.INPUT_INVALID".
-            this.#onError(ErrorCode.INPUT_NOT_EQUAL,this.#messageError?.isCompareRef);
+            this.#onError(
+                ErrorCode.INPUT_NOT_EQUAL,
+                this.#messageError?.isCompareRef,
+            );
         }
     }
     /**
@@ -826,7 +838,7 @@ export class FenextjsValidatorClass<T = any> {
      * Establece la regla de que los comparacion cuando sea correcto la validacion.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isRegex(data: RegExp,msg?:string) {
+    isRegex(data: RegExp, msg?: string) {
         this.#regex = true;
         this.#regexValue = data;
         this.#messageError.isRegex = msg;
@@ -849,13 +861,13 @@ export class FenextjsValidatorClass<T = any> {
         }
         // Si la validación de datos sean string.
         if (!(typeof this.#data == "string")) {
-            this.#onError(ErrorCode.INPUT_INVALID,this.#messageError?.isRegex);
+            this.#onError(ErrorCode.INPUT_INVALID, this.#messageError?.isRegex);
             return;
         }
 
         // Si la validación de datos sean cumplan con el regex.
         if (!this.#regexValue.test(this.#data)) {
-            this.#onError(ErrorCode.INPUT_INVALID,this.#messageError?.isRegex);
+            this.#onError(ErrorCode.INPUT_INVALID, this.#messageError?.isRegex);
             return;
         }
     }
@@ -864,7 +876,7 @@ export class FenextjsValidatorClass<T = any> {
      * Establece la regla de que los comparacion cuando sea correcto la validacion.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isEmail(msg?:string) {
+    isEmail(msg?: string) {
         this.#email = true;
         this.#messageError.isEmail = msg;
         return this;
@@ -882,14 +894,14 @@ export class FenextjsValidatorClass<T = any> {
         }
         // Si la validación de datos sean string.
         if (!(typeof this.#data == "string")) {
-            this.#onError(ErrorCode.INPUT_INVALID,this.#messageError?.isEmail);
+            this.#onError(ErrorCode.INPUT_INVALID, this.#messageError?.isEmail);
             return;
         }
         /*eslint no-useless-escape: "off"*/
         const validateEmail = /^[\w-\.]+@([\w-]+\.)+\w{1,}/g;
         // Si la validación de datos sean cumplan con el email.
         if (!validateEmail.test(this.#data)) {
-            this.#onError(ErrorCode.INPUT_INVALID,this.#messageError?.isEmail);
+            this.#onError(ErrorCode.INPUT_INVALID, this.#messageError?.isEmail);
             return;
         }
     }

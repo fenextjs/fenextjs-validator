@@ -35,26 +35,31 @@ export declare class FenextjsValidatorClass<T = any> {
      * @param d - Valor a comparar con los datos.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isEqual(d: T[] | T): this;
+    isEqual(d: T[] | T, msg?: string): this;
     /**
      * Método para habilitar la validación "isRequired".
      * Establece la regla de que los datos deben estar presentes y no ser nulos o indefinidos.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isRequired(): this;
+    isRequired(msg?: string): this;
     /**
      * Método para habilitar la validación "isBoolean".
      * Establece la regla de que los datos deben ser de tipo booleano.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isBoolean(): this;
-    isNumber(): this;
+    isBoolean(msg?: string): this;
+    /**
+     * Método para habilitar la validación "isNumber".
+     * Establece la regla de que los datos deben ser de tipo número.
+     * @returns Instancia de FenextjsValidatorClass.
+     */
+    isNumber(msg?: string): this;
     /**
      * Método para habilitar la validación "isString".
      * Establece la regla de que los datos deben ser de tipo cadena (string).
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isString(): this;
+    isString(msg?: string): this;
     /**
      * Método para habilitar la validación de longitud.
      * Establece la regla de que los datos deben tener una longitud específica.
@@ -62,13 +67,13 @@ export declare class FenextjsValidatorClass<T = any> {
      * @param {number} length - La longitud que deben tener los datos para que la validación sea válida.
      * @returns {FenextjsValidatorClass} - La instancia actual de la clase FenextjsValidatorClass, lo que permite el encadenamiento de métodos.
      */
-    isLength(length: number): this;
+    isLength(length: number, msg?: string): this;
     /**
      * Método para habilitar la validación "isDate".
      * Establece la regla de que los datos deben ser de tipo Date (fecha).
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isDate(): this;
+    isDate(msg?: string): this;
     /**
      * Método para habilitar la validación "isObject".
      * Establece la regla de que los datos deben ser de tipo objeto.
@@ -77,7 +82,7 @@ export declare class FenextjsValidatorClass<T = any> {
      */
     isObject(obj: {
         [id in keyof T]?: FenextjsValidatorClass;
-    } | undefined): this;
+    } | undefined, msg?: string): this;
     /**
      * Método para habilitar obtener la validación "isObject".
      * @returns objectValue

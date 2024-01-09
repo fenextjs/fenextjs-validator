@@ -101,6 +101,25 @@ export class FenextjsValidatorClass<T = any> {
     #regex = false;
     /** Valor que contiene las reglas de validación para cada propiedad del objeto en la validación "isRegex". */
     #regexValue: RegExp | undefined = undefined;
+
+    /** Mensaje personalizado para error */
+    #messageError: {
+        [id in
+            | "isEqual"
+            | "isRequered"
+            | "isBoolean"
+            | "isNumber"
+            | "isString"
+            | "isLength"
+            | "isDate"
+            | "isObject"
+            | "isArray"
+            | "isMin"
+            | "isMinOrEqual"
+            | "isMax"
+            | "isMaxOrEqual"|'isCompareRef'|'isRegex'|'isEmail']?: string | undefined;
+    } = {};
+
     /**
      * Constructor de la clase FenextjsValidatorClass.
      * @param {FenextjsValidatorClassConstructorProps} props - Opcional. Propiedades que se pueden pasar al constructor.
@@ -166,9 +185,10 @@ export class FenextjsValidatorClass<T = any> {
      * @param d - Valor a comparar con los datos.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isEqual(d: T[] | T) {
+    isEqual(d: T[] | T, msg?: string) {
         this.#equal = true;
         this.#equalValue = [d].flat(2) as T[];
+        this.#messageError.isEqual = msg ?? undefined;
         return this;
     }
     /**
@@ -186,7 +206,10 @@ export class FenextjsValidatorClass<T = any> {
         // Compara el valor almacenado en #equalValue con los datos a validar (#data).
         // Si no son iguales, lanza un ErrorInputInvalid para indicar que la validación falló.
         if (!this.#data || !this.#equalValue.includes(this.#data)) {
-            this.#onError(ErrorCode.INPUT_NOT_EQUAL);
+            this.#onError(
+                ErrorCode.INPUT_NOT_EQUAL,
+                this.#messageError?.isEqual,
+            );
         }
         return this;
     }
@@ -196,8 +219,9 @@ export class FenextjsValidatorClass<T = any> {
      * Establece la regla de que los datos deben estar presentes y no ser nulos o indefinidos.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isRequired() {
+    isRequired(msg?: string) {
         this.#required = true;
+        this.#messageError.isRequered = msg;
         return this;
     }
     /**
@@ -218,7 +242,10 @@ export class FenextjsValidatorClass<T = any> {
             this.#data == undefined ||
             this.#data === ""
         ) {
-            this.#onError(ErrorCode.INPUT_REQUIRED);
+            this.#onError(
+                ErrorCode.INPUT_REQUIRED,
+                this.#messageError?.isRequered,
+            );
         }
     }
     /**
@@ -226,8 +253,9 @@ export class FenextjsValidatorClass<T = any> {
      * Establece la regla de que los datos deben ser de tipo booleano.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isBoolean() {
+    isBoolean(msg?: string) {
         this.#boolean = true;
+        this.#messageError.isBoolean = msg;
         return this;
     }
     /**
@@ -244,18 +272,22 @@ export class FenextjsValidatorClass<T = any> {
         // Comprueba si los datos no son de tipo booleano.
         // Si no son de tipo booleano, lanza un ErrorInputInvalid para indicar que la validación falló.
         if (typeof this.#data !== "boolean") {
-            this.#onError(ErrorCode.INPUT_INVALID);
+            this.#onError(
+                ErrorCode.INPUT_INVALID,
+                this.#messageError?.isBoolean,
+            );
         }
-    } /**
+    }
+    /**
      * Método para habilitar la validación "isNumber".
      * Establece la regla de que los datos deben ser de tipo número.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isNumber() {
+    isNumber(msg?: string) {
         this.#number = true;
+        this.#messageError.isNumber = msg;
         return this;
     }
-
     /**
      * Método privado que valida la regla "isNumber".
      * Verifica si los datos cumplen con la regla de ser de tipo número.
@@ -270,20 +302,22 @@ export class FenextjsValidatorClass<T = any> {
         // Comprueba si los datos no son de tipo número.
         // Si no son de tipo número, lanza un ErrorInputInvalid para indicar que la validación falló.
         if (typeof this.#data !== "number") {
-            this.#onError(ErrorCode.INPUT_INVALID);
+            this.#onError(
+                ErrorCode.INPUT_INVALID,
+                this.#messageError?.isNumber,
+            );
         }
     }
-
     /**
      * Método para habilitar la validación "isString".
      * Establece la regla de que los datos deben ser de tipo cadena (string).
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isString() {
+    isString(msg?: string) {
         this.#string = true;
+        this.#messageError.isString = msg;
         return this;
     }
-
     /**
      * Método privado que valida la regla "isString".
      * Verifica si los datos cumplen con la regla de ser de tipo cadena (string).
@@ -298,10 +332,12 @@ export class FenextjsValidatorClass<T = any> {
         // Comprueba si los datos no son de tipo cadena (string).
         // Si no son de tipo cadena (string), lanza un ErrorInputInvalid para indicar que la validación falló.
         if (typeof this.#data !== "string") {
-            this.#onError(ErrorCode.INPUT_INVALID);
+            this.#onError(
+                ErrorCode.INPUT_INVALID,
+                this.#messageError?.isString,
+            );
         }
     }
-
     /**
      * Método para habilitar la validación de longitud.
      * Establece la regla de que los datos deben tener una longitud específica.
@@ -309,12 +345,12 @@ export class FenextjsValidatorClass<T = any> {
      * @param {number} length - La longitud que deben tener los datos para que la validación sea válida.
      * @returns {FenextjsValidatorClass} - La instancia actual de la clase FenextjsValidatorClass, lo que permite el encadenamiento de métodos.
      */
-    isLength(length: number) {
+    isLength(length: number, msg?: string) {
         this.#length = true;
         this.#lengthValue = length;
+        this.#messageError.isLength = msg;
         return this;
     }
-
     /**
      * Método privado para validar la longitud de los datos.
      * Si se habilitó la validación de longitud con "isLength()", verifica que los datos cumplan con la longitud requerida.
@@ -331,7 +367,10 @@ export class FenextjsValidatorClass<T = any> {
         if (Array.isArray(this.#data) || typeof this.#data == "string") {
             if (this.#data?.length !== this.#lengthValue) {
                 // Lanza una excepción "ErrorInputInvalid" con el código "ErrorCode.INPUT_INVALID".
-                this.#onError(ErrorCode.INPUT_LENGTH);
+                this.#onError(
+                    ErrorCode.INPUT_LENGTH,
+                    this.#messageError?.isLength,
+                );
             }
         }
     }
@@ -340,11 +379,11 @@ export class FenextjsValidatorClass<T = any> {
      * Establece la regla de que los datos deben ser de tipo Date (fecha).
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isDate() {
+    isDate(msg?: string) {
         this.#date = true;
+        this.#messageError.isDate = msg;
         return this;
     }
-
     /**
      * Método privado que valida la regla "isDate".
      * Verifica si los datos cumplen con la regla de ser de tipo Date (fecha).
@@ -359,7 +398,7 @@ export class FenextjsValidatorClass<T = any> {
         // Comprueba si los datos no son de tipo Date (fecha).
         // Si no son de tipo Date (fecha), lanza un ErrorInputInvalid para indicar que la validación falló.
         if (!(this.#data instanceof Date)) {
-            this.#onError(ErrorCode.INPUT_INVALID);
+            this.#onError(ErrorCode.INPUT_INVALID, this.#messageError?.isDate);
         }
     }
     /**
@@ -368,9 +407,13 @@ export class FenextjsValidatorClass<T = any> {
      * @param obj - Objeto con las reglas de validación para cada propiedad del objeto.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isObject(obj: { [id in keyof T]?: FenextjsValidatorClass } | undefined) {
+    isObject(
+        obj: { [id in keyof T]?: FenextjsValidatorClass } | undefined,
+        msg?: string,
+    ) {
         this.#object = true;
         this.#objectValue = obj;
+        this.#messageError.isObject = msg;
         return this;
     }
     /**
@@ -382,7 +425,6 @@ export class FenextjsValidatorClass<T = any> {
         | undefined {
         return this.#object ? this.#objectValue : undefined;
     }
-
     /**
      * Método privado que valida la regla "isObject".
      * Verifica si los datos cumplen con la regla de ser de tipo objeto y aplica las reglas de validación para cada propiedad del objeto.
@@ -397,7 +439,10 @@ export class FenextjsValidatorClass<T = any> {
         // Comprueba si los datos no son de tipo objeto.
         // Si no son de tipo objeto, lanza un ErrorInputInvalid para indicar que la validación falló.
         if (typeof this.#data !== "object") {
-            this.#onError(ErrorCode.INPUT_INVALID);
+            this.#onError(
+                ErrorCode.INPUT_INVALID,
+                this.#messageError?.isObject,
+            );
         }
         // Si la validación "isObject"  no se proporcionaron reglas de validación (#objectValue), no se hace nada.
         if (!this.#objectValue) {
@@ -436,12 +481,15 @@ export class FenextjsValidatorClass<T = any> {
      * @param item - Instancia de FenextjsValidatorClass que define las reglas de validación para cada elemento del array.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isArray(item: FenextjsValidatorClass | undefined = undefined) {
+    isArray(
+        item: FenextjsValidatorClass | undefined = undefined,
+        msg?: string,
+    ) {
         this.#array = true;
         this.#arrayValue = item;
+        this.#messageError.isArray = msg;
         return this;
     }
-
     /**
      * Método privado que valida la regla "isArray".
      * Verifica si los datos cumplen con la regla de ser un array y aplica las reglas de validación para cada elemento del array.
@@ -456,7 +504,7 @@ export class FenextjsValidatorClass<T = any> {
         // Comprueba si los datos no son un array.
         // Si no son un array, lanza un ErrorInputInvalid para indicar que la validación falló.
         if (!Array.isArray(this.#data)) {
-            this.#onError(ErrorCode.INPUT_INVALID);
+            this.#onError(ErrorCode.INPUT_INVALID, this.#messageError?.isArray);
             return;
         }
         // Si la validación "isArray" no se proporcionó una regla de validación para los elementos del array (#arrayValue), no se hace nada.
@@ -477,31 +525,30 @@ export class FenextjsValidatorClass<T = any> {
             }
         }
     }
-
     /**
      * Método para habilitar la validación "isMin".
      * Establece la regla de que los datos deben ser mayores que un valor específico.
      * @param min - Valor mínimo que los datos deben superar.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isMin(min: number | Date) {
+    isMin(min: number | Date, msg?: string) {
         this.#min = true;
         this.#minValue = min;
+        this.#messageError.isMin = msg;
         return this;
     }
-
     /**
      * Método para habilitar la validación "isMinOrEqual".
      * Establece la regla de que los datos deben ser mayores o iguales que un valor específico.
      * @param min - Valor mínimo que los datos deben superar o igualar.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isMinOrEqual(min: number | Date) {
+    isMinOrEqual(min: number | Date, msg?: string) {
         this.#minOrEqual = true;
         this.#minValue = min;
+        this.#messageError.isMinOrEqual = msg;
         return this;
     }
-
     /**
      * Método privado que valida las reglas "isMin" y "isMinOrEqual".
      * Verifica si los datos cumplen con las reglas de ser mayores que un valor mínimo o mayores/iguales al valor mínimo.
@@ -539,7 +586,10 @@ export class FenextjsValidatorClass<T = any> {
                 minValidate > nMinValue
             )
         ) {
-            this.#onError(ErrorCode.INPUT_VALUE_TOO_LOW);
+            this.#onError(
+                ErrorCode.INPUT_VALUE_TOO_LOW,
+                this.#messageError?.isMin,
+            );
         }
 
         // Verifica si se habilitó la regla "isMinOrEqual" y si los datos no superan o igualan el valor mínimo (#minValue).
@@ -552,34 +602,36 @@ export class FenextjsValidatorClass<T = any> {
                 minValidate >= nMinValue
             )
         ) {
-            this.#onError(ErrorCode.INPUT_VALUE_TOO_LOW);
+            this.#onError(
+                ErrorCode.INPUT_VALUE_TOO_LOW,
+                this.#messageError?.isMinOrEqual,
+            );
         }
     }
-
     /**
      * Método para habilitar la validación "isMax".
      * Establece la regla de que los datos deben ser menores que un valor específico.
      * @param max - Valor máximo que los datos deben ser menores que él.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isMax(max: number | Date) {
+    isMax(max: number | Date, msg?: string) {
         this.#max = true;
         this.#maxValue = max;
+        this.#messageError.isMax = msg;
         return this;
     }
-
     /**
      * Método para habilitar la validación "isMaxOrEqual".
      * Establece la regla de que los datos deben ser menores o iguales que un valor específico.
      * @param max - Valor máximo que los datos deben ser menores o igual que él.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isMaxOrEqual(max: number | Date) {
+    isMaxOrEqual(max: number | Date,msg?:string) {
         this.#maxOrEqual = true;
         this.#maxValue = max;
+        this.#messageError.isMaxOrEqual = msg;
         return this;
     }
-
     /**
      * Método privado que valida las reglas "isMax" y "isMaxOrEqual".
      * Verifica si los datos cumplen con las reglas de ser menores que un valor máximo o menores/iguales al valor máximo.
@@ -617,7 +669,7 @@ export class FenextjsValidatorClass<T = any> {
                 maxValidate < nMaxValue
             )
         ) {
-            this.#onError(ErrorCode.INPUT_VALUE_TOO_HIGH);
+            this.#onError(ErrorCode.INPUT_VALUE_TOO_HIGH,this.#messageError?.isMax);
         }
 
         // Verifica si se habilitó la regla "isMaxOrEqual" y si los datos no son menores o iguales al valor máximo (#maxValue).
@@ -630,10 +682,9 @@ export class FenextjsValidatorClass<T = any> {
                 maxValidate <= nMaxValue
             )
         ) {
-            this.#onError(ErrorCode.INPUT_VALUE_TOO_HIGH);
+            this.#onError(ErrorCode.INPUT_VALUE_TOO_HIGH,this.#messageError?.isMaxOrEqual);
         }
     }
-
     /**
      * Método para habilitar la comparación de valores de referencia.
      * Establece la regla de que los datos deben ser iguales a otro valor de referencia almacenado en la instancia.
@@ -641,12 +692,12 @@ export class FenextjsValidatorClass<T = any> {
      * @param {string} refKey - La clave que identifica el valor de referencia almacenado en la instancia para la comparación.
      * @returns {FenextjsValidatorClass} - La instancia actual de la clase FenextjsValidatorClass, lo que permite el encadenamiento de métodos.
      */
-    isCompareRef(refKey: string) {
+    isCompareRef(refKey: string,msg?:string) {
         this.#compareRef = true;
         this.#compareRefKey = refKey;
+        this.#messageError.isCompareRef = msg;
         return this;
     }
-
     /**
      * Método para obtener la comparación de valores de referencia.
      *
@@ -655,7 +706,6 @@ export class FenextjsValidatorClass<T = any> {
     getCompareRef() {
         return this.#compareRef ? this.#compareRefKey : undefined;
     }
-
     /**
      * Método privado para establecer el valor de referencia para la comparación.
      * Se utiliza junto con "isCompareRef()" para definir el valor de referencia que se utilizará en la comparación de datos.
@@ -667,7 +717,6 @@ export class FenextjsValidatorClass<T = any> {
         this.#compareRefValue = refValue;
         return this;
     }
-
     /**
      * Método privado para realizar la comparación de valores de referencia.
      * Si se habilitó la comparación de valores de referencia con "isCompareRef()",
@@ -684,10 +733,9 @@ export class FenextjsValidatorClass<T = any> {
 
         if (this.#compareRefValue !== this.#data) {
             // Lanza una excepción "ErrorInputInvalid" con el código "ErrorCode.INPUT_INVALID".
-            this.#onError(ErrorCode.INPUT_NOT_EQUAL);
+            this.#onError(ErrorCode.INPUT_NOT_EQUAL,this.#messageError?.isCompareRef);
         }
     }
-
     /**
      * Método privado para manejar errores en la validación.
      *
@@ -695,9 +743,12 @@ export class FenextjsValidatorClass<T = any> {
      * @returns {void}
      * @throws {ErrorFenextjs} - Una excepción específica basada en el código de error proporcionado o una excepción general "ErrorFenextjs".
      */
-    #onError(code?: ErrorCode) {
+    #onError(code?: ErrorCode, message?: string) {
         // Crear un objeto que mapea los códigos de error a las clases de error correspondientes.
-        const props: ErrorFenextjsProps<any> = { input: this.#getName() };
+        const props: ErrorFenextjsProps<any> = {
+            input: this.#getName(),
+            message,
+        };
         const sw: {
             [id in ErrorCode]?: ErrorFenextjs;
         } = {
@@ -724,7 +775,6 @@ export class FenextjsValidatorClass<T = any> {
         // Lanza una excepción específica basada en el código de error proporcionado o una excepción general "ErrorFenextjs".
         throw sw?.[code ?? ErrorCode.ERROR] ?? new ErrorFenextjs(props);
     }
-
     /**
      * Método para habilitar la validación "isWhen".
      * Establece la regla de que los comparacion cuando sea correcto la validacion.
@@ -741,7 +791,6 @@ export class FenextjsValidatorClass<T = any> {
         this.#whenThen = data.then;
         return this;
     }
-
     /**
      * Método privado que valida la regla "onWhen".
      * Verifica si los datos cumplen con whenIs y when Key para adicionar la la validacion whenThen.
@@ -772,18 +821,17 @@ export class FenextjsValidatorClass<T = any> {
             }
         }
     }
-
     /**
      * Método para habilitar la validación "isRegex".
      * Establece la regla de que los comparacion cuando sea correcto la validacion.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isRegex(data: RegExp) {
+    isRegex(data: RegExp,msg?:string) {
         this.#regex = true;
         this.#regexValue = data;
+        this.#messageError.isRegex = msg;
         return this;
     }
-
     /**
      * Método privado que valida la regla "onRegex".
      * Verifica si los datos cumplen con la comparacion con regexValue.
@@ -801,27 +849,26 @@ export class FenextjsValidatorClass<T = any> {
         }
         // Si la validación de datos sean string.
         if (!(typeof this.#data == "string")) {
-            this.#onError(ErrorCode.INPUT_INVALID);
+            this.#onError(ErrorCode.INPUT_INVALID,this.#messageError?.isRegex);
             return;
         }
 
         // Si la validación de datos sean cumplan con el regex.
         if (!this.#regexValue.test(this.#data)) {
-            this.#onError(ErrorCode.INPUT_INVALID);
+            this.#onError(ErrorCode.INPUT_INVALID,this.#messageError?.isRegex);
             return;
         }
     }
-
     /**
      * Método para habilitar la validación "isEmail".
      * Establece la regla de que los comparacion cuando sea correcto la validacion.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isEmail() {
+    isEmail(msg?:string) {
         this.#email = true;
+        this.#messageError.isEmail = msg;
         return this;
     }
-
     /**
      * Método privado que valida la regla "onEmail".
      * Verifica si los datos cumplen con la comparacion con email.
@@ -835,14 +882,14 @@ export class FenextjsValidatorClass<T = any> {
         }
         // Si la validación de datos sean string.
         if (!(typeof this.#data == "string")) {
-            this.#onError(ErrorCode.INPUT_INVALID);
+            this.#onError(ErrorCode.INPUT_INVALID,this.#messageError?.isEmail);
             return;
         }
         /*eslint no-useless-escape: "off"*/
         const validateEmail = /^[\w-\.]+@([\w-]+\.)+\w{1,}/g;
         // Si la validación de datos sean cumplan con el email.
         if (!validateEmail.test(this.#data)) {
-            this.#onError(ErrorCode.INPUT_INVALID);
+            this.#onError(ErrorCode.INPUT_INVALID,this.#messageError?.isEmail);
             return;
         }
     }

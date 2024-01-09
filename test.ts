@@ -81,7 +81,7 @@ console.log(ValidateIsString);
 // Ejemplo: Crear un validador y establecer la regla "isObject" con una regla de validación para la propiedad "key1"
 const ValidateIsObject = FenextjsValidator()
     .setName("ValidateIsString") // Establecer un nombre para esta instancia de validador (opcional)
-    .isObject()
+    .isObject({})
     .onValidate({
         key1: "not Equal", // Realizar la validación con el objeto { key1: "not Equal" }
 
@@ -272,3 +272,18 @@ const ValidateEmail = FenextjsValidator<string>()
     .onValidate("assadasdasd@as");
 
 console.log(ValidateEmail);
+
+interface ValidateWhenMSGInterface {
+    a: number;
+}
+// Ejemplo: Crear un validador usando when
+const ValidateWhenMSG = FenextjsValidator<ValidateWhenMSGInterface>()
+    .setName("ValidateWhenMSG")
+    .isObject({
+        a: FenextjsValidator().isNumber("Custom msg error"),
+    })
+    .onValidate({
+        a: "200",
+    } as any);
+
+console.log(ValidateWhenMSG);

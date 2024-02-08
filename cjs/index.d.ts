@@ -1,4 +1,5 @@
 import { ErrorFenextjs } from "fenextjs-error/cjs/Fenextjs";
+import { ErrorCode } from "fenextjs-interface";
 /**
  * Interfaz que define las propiedades del constructor de la clase FenextjsValidatorClass.
  */
@@ -14,7 +15,72 @@ export interface FenextjsValidatorClassConstructorProps {
  * @template T - Tipo de los datos a validar.
  */
 export declare class FenextjsValidatorClass<T = any> {
-    #private;
+    /** Propiedad privada que almacena name del validador. */
+    private name?;
+    /** Propiedad privada que almacena la clase superior. */
+    private parent?;
+    /** Propiedad privada que almacena los datos a validar. */
+    private data;
+    /** Bandera que indica si se debe aplicar la validación "isEqual". */
+    private equal;
+    /** Valor con el que se compararán los datos en la validación "isEqual". */
+    private equalValue;
+    /** Bandera que indica si se debe aplicar la validación "isRequired". */
+    private required;
+    /** Bandera que indica si los datos deben ser un booleano en la validación "isBoolean". */
+    private boolean;
+    /** Bandera que indica si los datos deben ser un número en la validación "isNumber". */
+    private number;
+    /** Bandera que indica si los datos deben ser un email en la validación "onEmail". */
+    private email;
+    /** Bandera que indica si los datos deben ser una cadena en la validación "isString". */
+    private string;
+    /** Bandera que indica si los datos deben ser una cadena en la validación "isLength". */
+    private length;
+    /** Valor que contiene las reglas de validación para cada propiedad del objeto en la validación "isLength". */
+    private lengthValue;
+    /** Bandera que indica si los datos deben ser una cadena en la validación "isCompareRef". */
+    private compareRef;
+    /** Valor que contiene key para cada propiedad del objeto en la validación "isCompareRef". */
+    private compareRefKey;
+    /** Valor que contiene las reglas de validación para cada propiedad del objeto en la validación "isCompareRef". */
+    private compareRefValue;
+    /** Bandera que indica si los datos deben ser una fecha en la validación "isDate". */
+    private date;
+    /** Bandera que indica si los datos deben ser un objeto en la validación "isObject". */
+    private object;
+    /** Valor que contiene las reglas de validación para cada propiedad del objeto en la validación "isObject". */
+    private objectValue;
+    /** Bandera que indica si los datos deben ser una cadena en la validación "isWhen". */
+    private when;
+    /** Key que contiene la clave para validacion de "isWhen" */
+    private whenKey;
+    /** Valor que contiene las reglas de validación para cada propiedad del objeto en la validación "isWhen" en key. */
+    private whenIs;
+    /** Valor que contiene las reglas de validación para cada propiedad del objeto en la validación "isWhen" en key. */
+    private whenThen;
+    /** Bandera que indica si los datos deben ser un array en la validación "isArray". */
+    private array;
+    /** Valor que contiene las reglas de validación para cada elemento del array en la validación "isArray". */
+    private arrayValue;
+    /** Bandera que indica si los datos deben ser mayor que un valor específico en la validación "isMin". */
+    private min;
+    /** Bandera que indica si los datos deben ser mayor o igual que un valor específico en la validación "isMinOrEqual". */
+    private minOrEqual;
+    /** Valor con el que se compararán los datos en las validaciones "isMin" y "isMinOrEqual". */
+    private minValue;
+    /** Bandera que indica si los datos deben ser menor que un valor específico en la validación "isMax". */
+    private max;
+    /** Bandera que indica si los datos deben ser menor o igual que un valor específico en la validación "isMaxOrEqual". */
+    private maxOrEqual;
+    /** Valor con el que se compararán los datos en las validaciones "isMax" y "isMaxOrEqual". */
+    private maxValue;
+    /** Bandera que indica si los datos deben ser una cadena que cumpla la regla regex. */
+    private regex;
+    /** Valor que contiene las reglas de validación para cada propiedad del objeto en la validación "isRegex". */
+    private regexValue;
+    /** Mensaje personalizado para error */
+    private messageError;
     /**
      * Constructor de la clase FenextjsValidatorClass.
      * @param {FenextjsValidatorClassConstructorProps} props - Opcional. Propiedades que se pueden pasar al constructor.
@@ -30,6 +96,22 @@ export declare class FenextjsValidatorClass<T = any> {
      */
     setName(name: string): this;
     /**
+     * Método privado para obtener el nombre completo de la instancia actual de FenextjsValidatorClass.
+     * Si esta instancia tiene un padre, obtiene el nombre completo que incluye el nombre de su padre.
+     * Si no tiene un padre, devuelve solo el nombre asociado a esta instancia.
+     *
+     * @returns {string} - El nombre completo de la instancia actual de FenextjsValidatorClass.
+     */
+    getName(): any;
+    /**
+     * Método para establecer el padre de la instancia actual de FenextjsValidatorClass.
+     * El padre es otra instancia de FenextjsValidatorClass que se utiliza como contexto superior.
+     *
+     * @param {FenextjsValidatorClass} parent - La instancia de FenextjsValidatorClass que se establecerá como padre.
+     * @returns {FenextjsValidatorClass} - La instancia actual de la clase FenextjsValidatorClass, lo que permite el encadenamiento de métodos.
+     */
+    setParent(parent: FenextjsValidatorClass): this;
+    /**
      * Método para definir la validación "isEqual".
      * Establece la regla de que los datos deben ser iguales al valor especificado.
      * @param d - Valor a comparar con los datos.
@@ -37,11 +119,26 @@ export declare class FenextjsValidatorClass<T = any> {
      */
     isEqual(d: T[] | T, msg?: string): this;
     /**
+     * Método privado que valida la regla "isEqual".
+     * Verifica si los datos son iguales al valor especificado en la regla de validación "isEqual".
+     * @throws {ErrorInputInvalid} Si los datos no son iguales al valor especificado.
+     * @returns Instancia de FenextjsValidatorClass.
+     * @private
+     */
+    onEqual(): this | undefined;
+    /**
      * Método para habilitar la validación "isRequired".
      * Establece la regla de que los datos deben estar presentes y no ser nulos o indefinidos.
      * @returns Instancia de FenextjsValidatorClass.
      */
     isRequired(msg?: string): this;
+    /**
+     * Método privado que valida la regla "isRequired".
+     * Verifica si los datos cumplen con la regla de ser requeridos (estar presentes y no ser nulos o indefinidos).
+     * @throws {ErrorInputRequired} Si los datos son nulos, indefinidos o una cadena vacía.
+     * @private
+     */
+    onRequered(): void;
     /**
      * Método para habilitar la validación "isBoolean".
      * Establece la regla de que los datos deben ser de tipo booleano.
@@ -49,17 +146,38 @@ export declare class FenextjsValidatorClass<T = any> {
      */
     isBoolean(msg?: string): this;
     /**
+     * Método privado que valida la regla "isBoolean".
+     * Verifica si los datos cumplen con la regla de ser de tipo booleano.
+     * @throws {ErrorInputInvalid} Si los datos no son de tipo booleano.
+     * @private
+     */
+    onBoolean(): void;
+    /**
      * Método para habilitar la validación "isNumber".
      * Establece la regla de que los datos deben ser de tipo número.
      * @returns Instancia de FenextjsValidatorClass.
      */
     isNumber(msg?: string): this;
     /**
+     * Método privado que valida la regla "isNumber".
+     * Verifica si los datos cumplen con la regla de ser de tipo número.
+     * @throws {ErrorInputInvalid} Si los datos no son de tipo número.
+     * @private
+     */
+    onNumber(): void;
+    /**
      * Método para habilitar la validación "isString".
      * Establece la regla de que los datos deben ser de tipo cadena (string).
      * @returns Instancia de FenextjsValidatorClass.
      */
     isString(msg?: string): this;
+    /**
+     * Método privado que valida la regla "isString".
+     * Verifica si los datos cumplen con la regla de ser de tipo cadena (string).
+     * @throws {ErrorInputInvalid} Si los datos no son de tipo cadena (string).
+     * @private
+     */
+    onString(): void;
     /**
      * Método para habilitar la validación de longitud.
      * Establece la regla de que los datos deben tener una longitud específica.
@@ -69,11 +187,27 @@ export declare class FenextjsValidatorClass<T = any> {
      */
     isLength(length: number, msg?: string): this;
     /**
+     * Método privado para validar la longitud de los datos.
+     * Si se habilitó la validación de longitud con "isLength()", verifica que los datos cumplan con la longitud requerida.
+     * Si no se cumple, lanza una excepción "ErrorInputInvalid" con el código "ErrorCode.INPUT_INVALID".
+     *
+     * @returns {void}
+     * @throws {ErrorInputInvalid} - Si los datos no cumplen con la longitud requerida.
+     */
+    onLength(): void;
+    /**
      * Método para habilitar la validación "isDate".
      * Establece la regla de que los datos deben ser de tipo Date (fecha).
      * @returns Instancia de FenextjsValidatorClass.
      */
     isDate(msg?: string): this;
+    /**
+     * Método privado que valida la regla "isDate".
+     * Verifica si los datos cumplen con la regla de ser de tipo Date (fecha).
+     * @throws {ErrorInputInvalid} Si los datos no son de tipo Date (fecha).
+     * @private
+     */
+    onDate(): void;
     /**
      * Método para habilitar la validación "isObject".
      * Establece la regla de que los datos deben ser de tipo objeto.
@@ -91,12 +225,26 @@ export declare class FenextjsValidatorClass<T = any> {
         [id in keyof T]?: FenextjsValidatorClass;
     } | undefined;
     /**
+     * Método privado que valida la regla "isObject".
+     * Verifica si los datos cumplen con la regla de ser de tipo objeto y aplica las reglas de validación para cada propiedad del objeto.
+     * @throws {ErrorInputInvalid} Si los datos no son de tipo objeto o alguna propiedad no cumple con las reglas de validación.
+     * @private
+     */
+    onObject(): void;
+    /**
      * Método para habilitar la validación "isArray".
      * Establece la regla de que los datos deben ser un array.
      * @param item - Instancia de FenextjsValidatorClass que define las reglas de validación para cada elemento del array.
      * @returns Instancia de FenextjsValidatorClass.
      */
     isArray(item?: FenextjsValidatorClass | undefined, msg?: string): this;
+    /**
+     * Método privado que valida la regla "isArray".
+     * Verifica si los datos cumplen con la regla de ser un array y aplica las reglas de validación para cada elemento del array.
+     * @throws {ErrorInputInvalid} Si los datos no son un array o alguno de los elementos no cumple con las reglas de validación.
+     * @private
+     */
+    onArray(): void;
     /**
      * Método para habilitar la validación "isMin".
      * Establece la regla de que los datos deben ser mayores que un valor específico.
@@ -112,6 +260,13 @@ export declare class FenextjsValidatorClass<T = any> {
      */
     isMinOrEqual(min: number | Date, msg?: string): this;
     /**
+     * Método privado que valida las reglas "isMin" y "isMinOrEqual".
+     * Verifica si los datos cumplen con las reglas de ser mayores que un valor mínimo o mayores/iguales al valor mínimo.
+     * @throws {ErrorInputInvalid} Si los datos no cumplen con las reglas de validación.
+     * @private
+     */
+    onMin(): void;
+    /**
      * Método para habilitar la validación "isMax".
      * Establece la regla de que los datos deben ser menores que un valor específico.
      * @param max - Valor máximo que los datos deben ser menores que él.
@@ -125,6 +280,13 @@ export declare class FenextjsValidatorClass<T = any> {
      * @returns Instancia de FenextjsValidatorClass.
      */
     isMaxOrEqual(max: number | Date, msg?: string): this;
+    /**
+     * Método privado que valida las reglas "isMax" y "isMaxOrEqual".
+     * Verifica si los datos cumplen con las reglas de ser menores que un valor máximo o menores/iguales al valor máximo.
+     * @throws {ErrorInputInvalid} Si los datos no cumplen con las reglas de validación.
+     * @private
+     */
+    onMax(): void;
     /**
      * Método para habilitar la comparación de valores de referencia.
      * Establece la regla de que los datos deben ser iguales a otro valor de referencia almacenado en la instancia.
@@ -148,6 +310,24 @@ export declare class FenextjsValidatorClass<T = any> {
      */
     setCompareRef(refValue: any): this;
     /**
+     * Método privado para realizar la comparación de valores de referencia.
+     * Si se habilitó la comparación de valores de referencia con "isCompareRef()",
+     * verifica que los datos sean iguales al valor de referencia establecido con "setCompareRef()".
+     * Si no se cumple, lanza una excepción "ErrorInputInvalid" con el código "ErrorCode.INPUT_INVALID".
+     *
+     * @returns {void}
+     * @throws {ErrorInputInvalid} - Si los datos no son iguales al valor de referencia.
+     */
+    onCompareRef(): void;
+    /**
+     * Método privado para manejar errores en la validación.
+     *
+     * @param {ErrorCode} code - Opcional. El código de error que indica el tipo de error ocurrido.
+     * @returns {void}
+     * @throws {ErrorFenextjs} - Una excepción específica basada en el código de error proporcionado o una excepción general "ErrorFenextjs".
+     */
+    onError(code?: ErrorCode, message?: string): void;
+    /**
      * Método para habilitar la validación "isWhen".
      * Establece la regla de que los comparacion cuando sea correcto la validacion.
      * @returns Instancia de FenextjsValidatorClass.
@@ -158,17 +338,38 @@ export declare class FenextjsValidatorClass<T = any> {
         then: FenextjsValidatorClass;
     }): this;
     /**
+     * Método privado que valida la regla "onWhen".
+     * Verifica si los datos cumplen con whenIs y when Key para adicionar la la validacion whenThen.
+     * @throws {ErrorInputInvalid} Si los datos no son de tipo Date (fecha).
+     * @private
+     */
+    onWhen(): void;
+    /**
      * Método para habilitar la validación "isRegex".
      * Establece la regla de que los comparacion cuando sea correcto la validacion.
      * @returns Instancia de FenextjsValidatorClass.
      */
     isRegex(data: RegExp, msg?: string): this;
     /**
+     * Método privado que valida la regla "onRegex".
+     * Verifica si los datos cumplen con la comparacion con regexValue.
+     * @throws {ErrorInputInvalid} Si los datos no cumplen con la compracion.
+     * @private
+     */
+    onRegex(): void;
+    /**
      * Método para habilitar la validación "isEmail".
      * Establece la regla de que los comparacion cuando sea correcto la validacion.
      * @returns Instancia de FenextjsValidatorClass.
      */
     isEmail(msg?: string): this;
+    /**
+     * Método privado que valida la regla "onEmail".
+     * Verifica si los datos cumplen con la comparacion con email.
+     * @throws {ErrorInputInvalid} Si los datos no cumplen con la compracion.
+     * @private
+     */
+    onEmail(): void;
     /**
      * Método para validar los datos proporcionados según las reglas establecidas.
      * Ejecuta todas las reglas de validación habilitadas previamente para los datos.

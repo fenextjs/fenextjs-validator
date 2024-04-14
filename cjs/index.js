@@ -49,12 +49,8 @@ class FenextjsValidatorClass {
     objectValue = undefined;
     /** Bandera que indica si los datos deben ser una cadena en la validación "isWhen". */
     when = false;
-    /** Key que contiene la clave para validacion de "isWhen" */
-    whenKey = undefined;
-    /** Valor que contiene las reglas de validación para cada propiedad del objeto en la validación "isWhen" en key. */
-    whenIs = undefined;
-    /** Valor que contiene las reglas de validación para cada propiedad del objeto en la validación "isWhen" en key. */
-    whenThen = undefined;
+    /** Value que contiene la validacion de "isWhen" */
+    whenValue = undefined;
     /** Bandera que indica si los datos deben ser un array en la validación "isArray". */
     array = false;
     /** Valor que contiene las reglas de validación para cada elemento del array en la validación "isArray". */
@@ -668,9 +664,8 @@ class FenextjsValidatorClass {
      */
     isWhen(data) {
         this.when = true;
-        this.whenKey = data.key;
-        this.whenIs = data.is;
-        this.whenThen = data.then;
+        this.whenValue ??= [];
+        this.whenValue.push(data);
         return this;
     }
     /**
@@ -689,14 +684,30 @@ class FenextjsValidatorClass {
             return;
         }
         // Si la validación de datos necesarios no existen, no se hace nada.
-        if (!this.whenIs || !this.whenKey || !this.whenThen) {
+        if (!this.whenValue) {
             return;
         }
-        // Si whenIs es corrento ejecuta la validacion
-        if (this.whenIs.onValidate(this.parent.data[this.whenKey]) === true) {
-            const result = this.whenThen.onValidate(this.data);
-            if (result !== true) {
-                throw result;
+        for (let i = 0; i < this.whenValue.length; i++) {
+            const validator = this.whenValue[i];
+            // Si whenIs es corrento ejecuta la validacion
+            if (validator.is.onValidate(this.parent.data[validator.key]) ===
+                true) {
+                validator.then.setParent(this.parent);
+                validator.then.setName(this.name ?? "");
+                const result = validator.then.onValidate(this.data);
+                if (result !== true) {
+                    throw result;
+                }
+            }
+            else {
+                if (validator.otherwise) {
+                    validator.otherwise.setParent(this.parent);
+                    validator.otherwise.setName(this.name ?? "");
+                    const result = validator.otherwise.onValidate(this.data);
+                    if (result !== true) {
+                        throw result;
+                    }
+                }
             }
         }
     }

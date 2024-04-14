@@ -9,12 +9,11 @@ import {
 import { ErrorFenextjs, ErrorFenextjsProps } from "fenextjs-error/cjs/Fenextjs";
 import { ErrorCode } from "fenextjs-interface";
 
-export interface FenextjsValidatorClassIsWhenProps{
-    key:string
-    is:FenextjsValidatorClass
-    then:FenextjsValidatorClass
-    otherwise?:FenextjsValidatorClass
-    
+export interface FenextjsValidatorClassIsWhenProps {
+    key: string;
+    is: FenextjsValidatorClass;
+    then: FenextjsValidatorClass;
+    otherwise?: FenextjsValidatorClass;
 }
 
 /**
@@ -80,7 +79,8 @@ export class FenextjsValidatorClass<T = any> {
     /** Bandera que indica si los datos deben ser una cadena en la validación "isWhen". */
     private when = false;
     /** Value que contiene la validacion de "isWhen" */
-    private whenValue:FenextjsValidatorClassIsWhenProps[] | undefined= undefined;
+    private whenValue: FenextjsValidatorClassIsWhenProps[] | undefined =
+        undefined;
 
     /** Bandera que indica si los datos deben ser un array en la validación "isArray". */
     private array = false;
@@ -779,8 +779,8 @@ export class FenextjsValidatorClass<T = any> {
      */
     isWhen(data: FenextjsValidatorClassIsWhenProps) {
         this.when = true;
-        this.whenValue ??= []
-        this.whenValue.push(data)
+        this.whenValue ??= [];
+        this.whenValue.push(data);
         return this;
     }
     /**
@@ -805,27 +805,27 @@ export class FenextjsValidatorClass<T = any> {
         for (let i = 0; i < this.whenValue.length; i++) {
             const validator = this.whenValue[i];
             // Si whenIs es corrento ejecuta la validacion
-            if (validator.is.onValidate(this.parent.data[validator.key]) === true) {
-                validator.then.setParent(this.parent)
-                validator.then.setName(this.name ?? '')
+            if (
+                validator.is.onValidate(this.parent.data[validator.key]) ===
+                true
+            ) {
+                validator.then.setParent(this.parent);
+                validator.then.setName(this.name ?? "");
                 const result = validator.then.onValidate(this.data);
                 if (result !== true) {
                     throw result;
                 }
-            }else{
-                if(validator.otherwise){
-                    validator.otherwise.setParent(this.parent)
-                    validator.otherwise.setName(this.name ?? '')
+            } else {
+                if (validator.otherwise) {
+                    validator.otherwise.setParent(this.parent);
+                    validator.otherwise.setName(this.name ?? "");
                     const result = validator.otherwise.onValidate(this.data);
                     if (result !== true) {
                         throw result;
                     }
-
                 }
             }
-            
         }
-
     }
     /**
      * Método para habilitar la validación "isRegex".

@@ -1,5 +1,11 @@
 import { ErrorFenextjs } from "fenextjs-error/cjs/Fenextjs";
 import { ErrorCode } from "fenextjs-interface";
+export interface FenextjsValidatorClassIsWhenProps {
+    key: string;
+    is: FenextjsValidatorClass;
+    then: FenextjsValidatorClass;
+    otherwise?: FenextjsValidatorClass;
+}
 /**
  * Interfaz que define las propiedades del constructor de la clase FenextjsValidatorClass.
  */
@@ -53,12 +59,8 @@ export declare class FenextjsValidatorClass<T = any> {
     private objectValue;
     /** Bandera que indica si los datos deben ser una cadena en la validación "isWhen". */
     private when;
-    /** Key que contiene la clave para validacion de "isWhen" */
-    private whenKey;
-    /** Valor que contiene las reglas de validación para cada propiedad del objeto en la validación "isWhen" en key. */
-    private whenIs;
-    /** Valor que contiene las reglas de validación para cada propiedad del objeto en la validación "isWhen" en key. */
-    private whenThen;
+    /** Value que contiene la validacion de "isWhen" */
+    private whenValue;
     /** Bandera que indica si los datos deben ser un array en la validación "isArray". */
     private array;
     /** Valor que contiene las reglas de validación para cada elemento del array en la validación "isArray". */
@@ -332,11 +334,7 @@ export declare class FenextjsValidatorClass<T = any> {
      * Establece la regla de que los comparacion cuando sea correcto la validacion.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isWhen(data: {
-        key: string;
-        is: FenextjsValidatorClass;
-        then: FenextjsValidatorClass;
-    }): this;
+    isWhen(data: FenextjsValidatorClassIsWhenProps): this;
     /**
      * Método privado que valida la regla "onWhen".
      * Verifica si los datos cumplen con whenIs y when Key para adicionar la la validacion whenThen.

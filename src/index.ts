@@ -9,6 +9,14 @@ import {
 import { ErrorFenextjs, ErrorFenextjsProps } from "fenextjs-error/cjs/Fenextjs";
 import { ErrorCode } from "fenextjs-interface";
 
+export interface FenextjsValidatorClassIsWhenProps{
+    key:string
+    is:FenextjsValidatorClass
+    then:FenextjsValidatorClass
+    otherwise?:FenextjsValidatorClass
+    
+}
+
 /**
  * Interfaz que define las propiedades del constructor de la clase FenextjsValidatorClass.
  */
@@ -71,13 +79,8 @@ export class FenextjsValidatorClass<T = any> {
 
     /** Bandera que indica si los datos deben ser una cadena en la validación "isWhen". */
     private when = false;
-    /** Key que contiene la clave para validacion de "isWhen" */
-    private whenKey: string | undefined = undefined;
-    /** Valor que contiene las reglas de validación para cada propiedad del objeto en la validación "isWhen" en key. */
-    private whenIs: FenextjsValidatorClass | undefined = undefined;
-
-    /** Valor que contiene las reglas de validación para cada propiedad del objeto en la validación "isWhen" en key. */
-    private whenThen: FenextjsValidatorClass | undefined = undefined;
+    /** Value que contiene la validacion de "isWhen" */
+    private whenValue:FenextjsValidatorClassIsWhenProps[] | undefined= undefined;
 
     /** Bandera que indica si los datos deben ser un array en la validación "isArray". */
     private array = false;
@@ -774,15 +777,10 @@ export class FenextjsValidatorClass<T = any> {
      * Establece la regla de que los comparacion cuando sea correcto la validacion.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isWhen(data: {
-        key: string;
-        is: FenextjsValidatorClass;
-        then: FenextjsValidatorClass;
-    }) {
+    isWhen(data: FenextjsValidatorClassIsWhenProps) {
         this.when = true;
-        this.whenKey = data.key;
-        this.whenIs = data.is;
-        this.whenThen = data.then;
+        this.whenValue ??= []
+        this.whenValue.push(data)
         return this;
     }
     /**
@@ -801,17 +799,29 @@ export class FenextjsValidatorClass<T = any> {
             return;
         }
         // Si la validación de datos necesarios no existen, no se hace nada.
-        if (!this.whenIs || !this.whenKey || !this.whenThen) {
+        if (!this.whenValue) {
             return;
         }
+        for (let i = 0; i < this.whenValue.length; i++) {
+            const validator = this.whenValue[i];
+            // Si whenIs es corrento ejecuta la validacion
+            if (validator.is.onValidate(this.parent.data[validator.key]) === true) {
+                const result = validator.then.onValidate(this.data);
+                if (result !== true) {
+                    throw result;
+                }
+            }else{
+                if(validator.otherwise){
+                    const result = validator.otherwise.onValidate(this.data);
+                    if (result !== true) {
+                        throw result;
+                    }
 
-        // Si whenIs es corrento ejecuta la validacion
-        if (this.whenIs.onValidate(this.parent.data[this.whenKey]) === true) {
-            const result = this.whenThen.onValidate(this.data);
-            if (result !== true) {
-                throw result;
+                }
             }
+            
         }
+
     }
     /**
      * Método para habilitar la validación "isRegex".

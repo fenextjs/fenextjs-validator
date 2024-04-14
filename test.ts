@@ -298,7 +298,11 @@ const ValidateWhenMultipme = FenextjsValidator()
             key:"a",
             is:FenextjsValidator().isEqual(1),
             then:FenextjsValidator().isEqual(1),
-            otherwise:FenextjsValidator().isMin(-10)
+            otherwise:FenextjsValidator().isWhen({
+                key:"a",
+                is:FenextjsValidator().isEqual(3),
+                then:FenextjsValidator().isEqual(3)
+            })
         })
         .isWhen({
             key:"a",
@@ -307,8 +311,8 @@ const ValidateWhenMultipme = FenextjsValidator()
         })
     })
     .onValidate({
-        a: 2,
-        b: -20
+        a: 3,
+        b: 4
     } as any);
 
 console.log(ValidateWhenMultipme);

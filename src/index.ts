@@ -806,12 +806,16 @@ export class FenextjsValidatorClass<T = any> {
             const validator = this.whenValue[i];
             // Si whenIs es corrento ejecuta la validacion
             if (validator.is.onValidate(this.parent.data[validator.key]) === true) {
+                validator.then.setParent(this.parent)
+                validator.then.setName(this.name ?? '')
                 const result = validator.then.onValidate(this.data);
                 if (result !== true) {
                     throw result;
                 }
             }else{
                 if(validator.otherwise){
+                    validator.otherwise.setParent(this.parent)
+                    validator.otherwise.setName(this.name ?? '')
                     const result = validator.otherwise.onValidate(this.data);
                     if (result !== true) {
                         throw result;

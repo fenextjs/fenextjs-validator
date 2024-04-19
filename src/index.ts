@@ -105,6 +105,11 @@ export class FenextjsValidatorClass<T = any> {
     private regex = false;
     /** Valor que contiene las reglas de validación para cada propiedad del objeto en la validación "isRegex". */
     private regexValue: RegExp | undefined = undefined;
+    /** Bandera que indica si los datos deben ser una cadena que cumpla la regla regex. */
+    private custom = false;
+    /** Valor que contiene las reglas de validación para cada propiedad del objeto en la validación "isRegex". */
+    private customValue: ((data: T) => true | ErrorFenextjs) | undefined =
+        undefined;
 
     /** Mensaje personalizado para error */
     private messageError: {
@@ -124,7 +129,8 @@ export class FenextjsValidatorClass<T = any> {
             | "isMaxOrEqual"
             | "isCompareRef"
             | "isRegex"
-            | "isEmail"]?: string | undefined;
+            | "isEmail"
+            | "isCustom"]?: string | undefined;
     } = {};
 
     /**
@@ -901,6 +907,40 @@ export class FenextjsValidatorClass<T = any> {
     }
 
     /**
+     * Método para habilitar la validación "onCustom".
+     * Establece la regla de que los comparacion cuando se cumpla una validacion custom.
+     * @returns Instancia de FenextjsValidatorClass.
+     */
+    isCustom(data: (data: T) => true | ErrorFenextjs, msg?: string) {
+        this.custom = true;
+        this.customValue = data;
+        this.messageError.isCustom = msg;
+        return this;
+    }
+    /**
+     * Método privado que valida la regla "onCustom".
+     * Verifica si los datos cumplen con la comparacion custom.
+     * @throws {ErrorInputInvalid} Si los datos no cumplen con la compracion.
+     * @private
+     */
+    onCustom() {
+        // Si la validación "isCustom" no está habilitada, no se hace nada.
+        if (!this.custom) {
+            return;
+        }
+        if (typeof this.customValue !== "function") {
+            return;
+        }
+        if (this.data == undefined) {
+            return;
+        }
+        const v = this.customValue(this.data);
+        if (v != true) {
+            this.onError(v.code, this.messageError?.isCustom ?? v.message);
+            return;
+        }
+    }
+    /**
      * Método para validar los datos proporcionados según las reglas establecidas.
      * Ejecuta todas las reglas de validación habilitadas previamente para los datos.
      * @param d - Datos que se deben validar.
@@ -927,6 +967,7 @@ export class FenextjsValidatorClass<T = any> {
             this.onMin();
             this.onMax();
             this.onCompareRef();
+            this.onCustom();
 
             // Si todas las reglas de validación se cumplen, retorna true para indicar que los datos son válidos.
             return true;

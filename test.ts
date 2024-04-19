@@ -1,4 +1,5 @@
 // // Importar la función FenextjsValidator desde el archivo actual ("." representa el archivo actual)
+import { ErrorFenextjs } from "fenextjs-error/cjs/Fenextjs";
 import { FenextjsValidator } from "./src";
 
 // // Ejemplo: Crear un validador y establecer la regla "isRequired"
@@ -288,31 +289,47 @@ import { FenextjsValidator } from "./src";
 
 // console.log(ValidateWhenMSG);
 
+// const ValidateWhenMultipme = FenextjsValidator()
+//     .setName("ValidateWhenMSG")
+//     .isObject({
+//         a: FenextjsValidator().isNumber("Custom msg error"),
+//         b:FenextjsValidator()
+//         .isWhen({
+//             key:"a",
+//             is:FenextjsValidator().isEqual(1),
+//             then:FenextjsValidator().isEqual(1),
+//             otherwise:FenextjsValidator().isWhen({
+//                 key:"a",
+//                 is:FenextjsValidator().isEqual(3),
+//                 then:FenextjsValidator().isEqual(3)
+//             })
+//         })
+//         .isWhen({
+//             key:"a",
+//             is:FenextjsValidator().isEqual(2),
+//             then:FenextjsValidator().isEqual(2)
+//         })
+//     })
+//     .onValidate({
+//         a: 3,
+//         b: 4
+//     } as any);
 
-const ValidateWhenMultipme = FenextjsValidator()
-    .setName("ValidateWhenMSG")
-    .isObject({
-        a: FenextjsValidator().isNumber("Custom msg error"),
-        b:FenextjsValidator()
-        .isWhen({
-            key:"a",
-            is:FenextjsValidator().isEqual(1),
-            then:FenextjsValidator().isEqual(1),
-            otherwise:FenextjsValidator().isWhen({
-                key:"a",
-                is:FenextjsValidator().isEqual(3),
-                then:FenextjsValidator().isEqual(3)
-            })
-        })
-        .isWhen({
-            key:"a",
-            is:FenextjsValidator().isEqual(2),
-            then:FenextjsValidator().isEqual(2)
-        })
+// console.log(ValidateWhenMultipme);
+
+const VCustom = FenextjsValidator<{ a: number; b: number }>()
+    .setName("Custom")
+    .isCustom((d) => {
+        if (d.a != 3 || d.b != 4) {
+            return new ErrorFenextjs({
+                message:"Custom Message"
+            });
+        }
+        return true;
     })
     .onValidate({
         a: 3,
-        b: 4
-    } as any);
+        b: 5,
+    });
 
-console.log(ValidateWhenMultipme);
+console.log(VCustom);

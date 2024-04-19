@@ -81,6 +81,10 @@ export declare class FenextjsValidatorClass<T = any> {
     private regex;
     /** Valor que contiene las reglas de validación para cada propiedad del objeto en la validación "isRegex". */
     private regexValue;
+    /** Bandera que indica si los datos deben ser una cadena que cumpla la regla regex. */
+    private custom;
+    /** Valor que contiene las reglas de validación para cada propiedad del objeto en la validación "isRegex". */
+    private customValue;
     /** Mensaje personalizado para error */
     private messageError;
     /**
@@ -368,6 +372,19 @@ export declare class FenextjsValidatorClass<T = any> {
      * @private
      */
     onEmail(): void;
+    /**
+     * Método para habilitar la validación "onCustom".
+     * Establece la regla de que los comparacion cuando se cumpla una validacion custom.
+     * @returns Instancia de FenextjsValidatorClass.
+     */
+    isCustom(data: (data: T) => true | ErrorFenextjs, msg?: string): this;
+    /**
+     * Método privado que valida la regla "onCustom".
+     * Verifica si los datos cumplen con la comparacion custom.
+     * @throws {ErrorInputInvalid} Si los datos no cumplen con la compracion.
+     * @private
+     */
+    onCustom(): void;
     /**
      * Método para validar los datos proporcionados según las reglas establecidas.
      * Ejecuta todas las reglas de validación habilitadas previamente para los datos.

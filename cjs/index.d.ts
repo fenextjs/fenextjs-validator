@@ -5,6 +5,7 @@ export interface FenextjsValidatorClassIsWhenProps {
     is: FenextjsValidatorClass;
     then: FenextjsValidatorClass;
     otherwise?: FenextjsValidatorClass;
+    dataIsCurrent?: boolean;
 }
 /**
  * Interfaz que define las propiedades del constructor de la clase FenextjsValidatorClass.

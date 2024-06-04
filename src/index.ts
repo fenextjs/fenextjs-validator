@@ -14,7 +14,7 @@ export interface FenextjsValidatorClassIsWhenProps {
     is: FenextjsValidatorClass;
     then: FenextjsValidatorClass;
     otherwise?: FenextjsValidatorClass;
-    dataIsCurrent?:boolean
+    dataIsCurrent?: boolean;
 }
 
 /**
@@ -807,11 +807,11 @@ export class FenextjsValidatorClass<T = any> {
         }
         for (let i = 0; i < this.whenValue.length; i++) {
             const validator = this.whenValue[i];
-            let parent = this.parent ;
+            let parent: FenextjsValidatorClass | undefined = this.parent;
             if (validator.dataIsCurrent === true) {
                 parent = this;
             }
-            if(!parent){
+            if (!parent) {
                 continue;
             }
             // Si whenIs es corrento ejecuta la validacion

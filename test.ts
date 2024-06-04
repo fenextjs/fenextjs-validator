@@ -347,6 +347,7 @@ const VCustom = FenextjsValidator<{ a: number; b: number }>()
         then: FenextjsValidator().isObject({
             b:FenextjsValidator().isNumber().isMax(10)
         }),
+        dataIsCurrent:true
     })
     .onValidate({
         a: 3,

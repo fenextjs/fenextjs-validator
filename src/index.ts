@@ -800,8 +800,9 @@ export class FenextjsValidatorClass<T = any> {
         if (!this.when) {
             return;
         }
+        const parent = this.parent ?? this
         // Si la validación "parent" no existe, no se hace nada.
-        if (!this.parent) {
+        if (!parent) {
             return;
         }
         // Si la validación de datos necesarios no existen, no se hace nada.
@@ -812,10 +813,10 @@ export class FenextjsValidatorClass<T = any> {
             const validator = this.whenValue[i];
             // Si whenIs es corrento ejecuta la validacion
             if (
-                validator.is.onValidate(this.parent.data[validator.key]) ===
+                validator.is.onValidate(parent.data[validator.key]) ===
                 true
             ) {
-                validator.then.setParent(this.parent);
+                validator.then.setParent(parent);
                 validator.then.setName(this.name ?? "");
                 const result = validator.then.onValidate(this.data);
                 if (result !== true) {
@@ -823,7 +824,7 @@ export class FenextjsValidatorClass<T = any> {
                 }
             } else {
                 if (validator.otherwise) {
-                    validator.otherwise.setParent(this.parent);
+                    validator.otherwise.setParent(parent);
                     validator.otherwise.setName(this.name ?? "");
                     const result = validator.otherwise.onValidate(this.data);
                     if (result !== true) {

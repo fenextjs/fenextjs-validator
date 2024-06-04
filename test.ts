@@ -317,19 +317,40 @@ import { FenextjsValidator } from "./src";
 
 // console.log(ValidateWhenMultipme);
 
+// const VCustom = FenextjsValidator<{ a: number; b: number }>()
+//     .setName("Custom")
+//     .isCustom((d) => {
+//         if (d.a != 3 || d.b != 4) {
+//             return new ErrorFenextjs({
+//                 message:"Custom Message"
+//             });
+//         }
+//         return true;
+//     })
+//     .onValidate({
+//         a: 3,
+//         b: 5,
+//     });
+
+// console.log(VCustom);
+
+
+
 const VCustom = FenextjsValidator<{ a: number; b: number }>()
     .setName("Custom")
-    .isCustom((d) => {
-        if (d.a != 3 || d.b != 4) {
-            return new ErrorFenextjs({
-                message:"Custom Message"
-            });
-        }
-        return true;
+    .isObject({
+        a:FenextjsValidator().isNumber().isMin(0)
+    })
+    .isWhen({
+        key: 'a',
+        is: FenextjsValidator().isEqual(3),
+        then: FenextjsValidator().isObject({
+            b:FenextjsValidator().isNumber().isMax(10)
+        }),
     })
     .onValidate({
         a: 3,
-        b: 5,
+        b: 15,
     });
 
 console.log(VCustom);

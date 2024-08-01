@@ -354,4 +354,6 @@ const VCustom = FenextjsValidator<{ a: number; b: number }>()
         b: 15,
     });
 
+    
+
 console.log(VCustom);

@@ -718,6 +718,14 @@ class FenextjsValidatorClass {
         }
     }
     /**
+     * Método public para obtener el valor de validacion de when.
+     * @returns {FenextjsValidatorClassIsWhenProps[] | undefined}
+     * @public
+     */
+    getWhenValue() {
+        return this.whenValue;
+    }
+    /**
      * Método para habilitar la validación "isRegex".
      * Establece la regla de que los comparacion cuando sea correcto la validacion.
      * @returns Instancia de FenextjsValidatorClass.

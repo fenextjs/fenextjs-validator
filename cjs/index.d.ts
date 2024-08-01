@@ -348,6 +348,12 @@ export declare class FenextjsValidatorClass<T = any> {
      */
     onWhen(): void;
     /**
+     * Método public para obtener el valor de validacion de when.
+     * @returns {FenextjsValidatorClassIsWhenProps[] | undefined}
+     * @public
+     */
+    getWhenValue(): FenextjsValidatorClassIsWhenProps[] | undefined;
+    /**
      * Método para habilitar la validación "isRegex".
      * Establece la regla de que los comparacion cuando sea correcto la validacion.
      * @returns Instancia de FenextjsValidatorClass.

@@ -217,13 +217,13 @@ export class FenextjsValidatorClass<T = any> {
         if (!this.equal || !this.equalValue || this.equalValue.length == 0) {
             return;
         }
-        
+
         // Compara el valor almacenado en equalValue con los datos a validar (data).
         // Si no son iguales, lanza un ErrorInputInvalid para indicar que la validación falló.
         if (!this.equalValue.includes(this.data as T)) {
             this.onError(ErrorCode.INPUT_NOT_EQUAL, this.messageError?.isEqual);
         }
-        
+
         return this;
     }
 

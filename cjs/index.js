@@ -158,7 +158,7 @@ class FenextjsValidatorClass {
         }
         // Compara el valor almacenado en equalValue con los datos a validar (data).
         // Si no son iguales, lanza un ErrorInputInvalid para indicar que la validación falló.
-        if (!this.data || !this.equalValue.includes(this.data)) {
+        if (!this.equalValue.includes(this.data)) {
             this.onError(fenextjs_interface_1.ErrorCode.INPUT_NOT_EQUAL, this.messageError?.isEqual);
         }
         return this;
@@ -179,7 +179,7 @@ class FenextjsValidatorClass {
      * @throws {ErrorInputRequired} Si los datos son nulos, indefinidos o una cadena vacía.
      * @private
      */
-    onRequered() {
+    onRequired() {
         // Si la validación "isRequired" no está habilitada, no se hace nada.
         if (!this.required) {
             return;
@@ -843,7 +843,7 @@ class FenextjsValidatorClass {
             // Ejecuta todas las reglas de validación habilitadas para los datos.
             this.onWhen();
             this.onEqual();
-            this.onRequered();
+            this.onRequired();
             this.onBoolean();
             this.onNumber();
             this.onString();

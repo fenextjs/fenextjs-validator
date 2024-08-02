@@ -145,7 +145,7 @@ export declare class FenextjsValidatorClass<T = any> {
      * @throws {ErrorInputRequired} Si los datos son nulos, indefinidos o una cadena vacía.
      * @private
      */
-    onRequered(): void;
+    onRequired(): void;
     /**
      * Método para habilitar la validación "isBoolean".
      * Establece la regla de que los datos deben ser de tipo booleano.

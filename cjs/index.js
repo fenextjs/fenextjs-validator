@@ -617,7 +617,7 @@ class FenextjsValidatorClass {
      * @throws {ErrorInputInvalid} - Si los datos no son iguales al valor de referencia.
      */
     onCompareRef() {
-        if (!this.compareRef || !this.compareRefValue) {
+        if (!this.compareRef) {
             return;
         }
         if (this.compareRefValue !== this.data) {

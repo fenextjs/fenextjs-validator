@@ -112,14 +112,10 @@ export class FenextjsValidatorClass<T = any> {
     private customValue: ((data: T) => true | ErrorFenextjs) | undefined =
         undefined;
 
-
-
     /** Bandera que indica si los datos deben ser una cadena en la validación "isWhen". */
     private or = false;
     /** Value que contiene la validacion de "isWhen" */
-    private orValue: FenextjsValidatorClass[] | undefined =
-        undefined;
-
+    private orValue: FenextjsValidatorClass[] | undefined = undefined;
 
     /** Mensaje personalizado para error */
     private messageError: {
@@ -141,8 +137,7 @@ export class FenextjsValidatorClass<T = any> {
             | "isRegex"
             | "isEmail"
             | "isCustom"
-            | "isOr"
-        ]?: string | undefined;
+            | "isOr"]?: string | undefined;
     } = {};
 
     /**
@@ -964,7 +959,6 @@ export class FenextjsValidatorClass<T = any> {
         }
     }
 
-
     /**
      * Método para definir la validación "isOr".
      * Establece la regla de que los datos deben cumplir al menos una validacion.
@@ -989,7 +983,7 @@ export class FenextjsValidatorClass<T = any> {
         if (!this.or || !this.orValue || this.orValue.length == 0) {
             return;
         }
-        if(this.orValue.some(e=>e.onValidate(this.data) === true)){
+        if (this.orValue.some((e) => e.onValidate(this.data) === true)) {
             return this;
         }
         this.onError(ErrorCode.INPUT_INVALID, this.messageError?.isOr);

@@ -75,6 +75,10 @@ class FenextjsValidatorClass {
     custom = false;
     /** Valor que contiene las reglas de validación para cada propiedad del objeto en la validación "isRegex". */
     customValue = undefined;
+    /** Bandera que indica si los datos deben ser una cadena en la validación "isWhen". */
+    or = false;
+    /** Value que contiene la validacion de "isWhen" */
+    orValue = undefined;
     /** Mensaje personalizado para error */
     messageError = {};
     /**
@@ -831,6 +835,36 @@ class FenextjsValidatorClass {
         }
     }
     /**
+     * Método para definir la validación "isOr".
+     * Establece la regla de que los datos deben cumplir al menos una validacion.
+     * @param d - Comparador para los datos.
+     * @returns Instancia de FenextjsValidatorClass.
+     */
+    isOr(d, msg) {
+        this.or = true;
+        this.orValue = d;
+        this.messageError.isOr = msg ?? undefined;
+        return this;
+    }
+    /**
+     * Método privado que valida la regla "isOr".
+     * Verifica si los datos cumplen con almenos una validacion.
+     * @throws {ErrorInputInvalid} Si los datos no son iguales al valor especificado.
+     * @returns Instancia de FenextjsValidatorClass.
+     * @private
+     */
+    onOr() {
+        // Si la validación "isOr" no está habilitada, no se hace nada.
+        if (!this.or || !this.orValue || this.orValue.length == 0) {
+            return;
+        }
+        if (this.orValue.some((e) => e.onValidate(this.data) === true)) {
+            return this;
+        }
+        this.onError(fenextjs_interface_1.ErrorCode.INPUT_INVALID, this.messageError?.isOr);
+        return this;
+    }
+    /**
      * Método para validar los datos proporcionados según las reglas establecidas.
      * Ejecuta todas las reglas de validación habilitadas previamente para los datos.
      * @param d - Datos que se deben validar.
@@ -857,6 +891,7 @@ class FenextjsValidatorClass {
             this.onMax();
             this.onCompareRef();
             this.onCustom();
+            this.onOr();
             // Si todas las reglas de validación se cumplen, retorna true para indicar que los datos son válidos.
             return true;
         }

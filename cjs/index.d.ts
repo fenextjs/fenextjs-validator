@@ -86,6 +86,10 @@ export declare class FenextjsValidatorClass<T = any> {
     private custom;
     /** Valor que contiene las reglas de validación para cada propiedad del objeto en la validación "isRegex". */
     private customValue;
+    /** Bandera que indica si los datos deben ser una cadena en la validación "isWhen". */
+    private or;
+    /** Value que contiene la validacion de "isWhen" */
+    private orValue;
     /** Mensaje personalizado para error */
     private messageError;
     /**
@@ -392,6 +396,21 @@ export declare class FenextjsValidatorClass<T = any> {
      * @private
      */
     onCustom(): void;
+    /**
+     * Método para definir la validación "isOr".
+     * Establece la regla de que los datos deben cumplir al menos una validacion.
+     * @param d - Comparador para los datos.
+     * @returns Instancia de FenextjsValidatorClass.
+     */
+    isOr(d: FenextjsValidatorClass[], msg?: string): this;
+    /**
+     * Método privado que valida la regla "isOr".
+     * Verifica si los datos cumplen con almenos una validacion.
+     * @throws {ErrorInputInvalid} Si los datos no son iguales al valor especificado.
+     * @returns Instancia de FenextjsValidatorClass.
+     * @private
+     */
+    onOr(): this | undefined;
     /**
      * Método para validar los datos proporcionados según las reglas establecidas.
      * Ejecuta todas las reglas de validación habilitadas previamente para los datos.

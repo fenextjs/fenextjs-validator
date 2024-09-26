@@ -112,6 +112,15 @@ export class FenextjsValidatorClass<T = any> {
     private customValue: ((data: T) => true | ErrorFenextjs) | undefined =
         undefined;
 
+
+
+    /** Bandera que indica si los datos deben ser una cadena en la validación "isWhen". */
+    private or = false;
+    /** Value que contiene la validacion de "isWhen" */
+    private orValue: FenextjsValidatorClass[] | undefined =
+        undefined;
+
+
     /** Mensaje personalizado para error */
     private messageError: {
         [id in
@@ -131,7 +140,9 @@ export class FenextjsValidatorClass<T = any> {
             | "isCompareRef"
             | "isRegex"
             | "isEmail"
-            | "isCustom"]?: string | undefined;
+            | "isCustom"
+            | "isOr"
+        ]?: string | undefined;
     } = {};
 
     /**
@@ -952,6 +963,40 @@ export class FenextjsValidatorClass<T = any> {
             return;
         }
     }
+
+
+    /**
+     * Método para definir la validación "isOr".
+     * Establece la regla de que los datos deben cumplir al menos una validacion.
+     * @param d - Comparador para los datos.
+     * @returns Instancia de FenextjsValidatorClass.
+     */
+    isOr(d: FenextjsValidatorClass[], msg?: string) {
+        this.or = true;
+        this.orValue = d;
+        this.messageError.isOr = msg ?? undefined;
+        return this;
+    }
+    /**
+     * Método privado que valida la regla "isOr".
+     * Verifica si los datos cumplen con almenos una validacion.
+     * @throws {ErrorInputInvalid} Si los datos no son iguales al valor especificado.
+     * @returns Instancia de FenextjsValidatorClass.
+     * @private
+     */
+    onOr() {
+        // Si la validación "isOr" no está habilitada, no se hace nada.
+        if (!this.or || !this.orValue || this.orValue.length == 0) {
+            return;
+        }
+        if(this.orValue.some(e=>e.onValidate(this.data) === true)){
+            return this;
+        }
+        this.onError(ErrorCode.INPUT_INVALID, this.messageError?.isOr);
+
+        return this;
+    }
+
     /**
      * Método para validar los datos proporcionados según las reglas establecidas.
      * Ejecuta todas las reglas de validación habilitadas previamente para los datos.
@@ -980,6 +1025,7 @@ export class FenextjsValidatorClass<T = any> {
             this.onMax();
             this.onCompareRef();
             this.onCustom();
+            this.onOr();
 
             // Si todas las reglas de validación se cumplen, retorna true para indicar que los datos son válidos.
             return true;

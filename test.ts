@@ -336,19 +336,41 @@ import { FenextjsValidator } from "./src";
 
 
 
-const VCustom = FenextjsValidator<{ a: number; b: number }>()
-    .setName("Custom")
-    // .isObject({
-    //     a:FenextjsValidator().isNumber().isMin(0)
-    // })
-    .isWhen({
-        key: 'a',
-        is: FenextjsValidator().isEqual(0),
-        then: FenextjsValidator().isObject({
-            b:FenextjsValidator().isNumber().isMax(10)
+// const VCustom = FenextjsValidator<{ a: number; b: number }>()
+//     .setName("Custom")
+//     // .isObject({
+//     //     a:FenextjsValidator().isNumber().isMin(0)
+//     // })
+//     .isWhen({
+//         key: 'a',
+//         is: FenextjsValidator().isEqual(0),
+//         then: FenextjsValidator().isObject({
+//             b:FenextjsValidator().isNumber().isMax(10)
+//         }),
+//         dataIsCurrent:true
+//     })
+//     .onValidate({
+//         a: 0,
+//         b: 15,
+//     });
+
+    
+
+// console.log(VCustom);
+
+
+
+
+const VOr = FenextjsValidator<{ a: number; b: number }>()
+    .setName("Or")
+    .isOr([
+        FenextjsValidator<{ a: number; b: number }>().isObject({
+            a:FenextjsValidator().isEqual(2)
         }),
-        dataIsCurrent:true
-    })
+        FenextjsValidator<{ a: number; b: number }>().isObject({
+            b:FenextjsValidator().isEqual(20)
+        }),
+    ],"msg or")
     .onValidate({
         a: 0,
         b: 15,
@@ -356,4 +378,4 @@ const VCustom = FenextjsValidator<{ a: number; b: number }>()
 
     
 
-console.log(VCustom);
+console.log(VOr);

@@ -376,6 +376,7 @@ const VOr = FenextjsValidator<{ a: number; b: number }>()
         b: 15,
     });
 
-    
-
+    // VOr.getArrayValue().
 console.log(VOr);
+
+

@@ -257,6 +257,12 @@ export declare class FenextjsValidatorClass<T = any> {
      */
     onArray(): void;
     /**
+     * Método public para obtener el valor de validacion de array.
+     * @returns {FenextjsValidatorClassIsWhenProps | undefined}
+     * @public
+     */
+    getArrayValue(): FenextjsValidatorClass<any> | undefined;
+    /**
      * Método para habilitar la validación "isMin".
      * Establece la regla de que los datos deben ser mayores que un valor específico.
      * @param min - Valor mínimo que los datos deben superar.

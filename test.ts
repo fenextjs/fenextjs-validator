@@ -361,22 +361,36 @@ import { FenextjsValidator } from "./src";
 
 
 
-const VOr = FenextjsValidator<{ a: number; b: number }>()
-    .setName("Or")
-    .isOr([
-        FenextjsValidator<{ a: number; b: number }>().isObject({
-            a:FenextjsValidator().isEqual(2)
-        }),
-        FenextjsValidator<{ a: number; b: number }>().isObject({
-            b:FenextjsValidator().isEqual(20)
-        }),
-    ],"msg or")
-    .onValidate({
-        a: 0,
-        b: 15,
-    });
+// const VOr = FenextjsValidator<{ a: number; b: number }>()
+//     .setName("Or")
+//     .isOr([
+//         FenextjsValidator<{ a: number; b: number }>().isObject({
+//             a:FenextjsValidator().isEqual(2)
+//         }),
+//         FenextjsValidator<{ a: number; b: number }>().isObject({
+//             b:FenextjsValidator().isEqual(20)
+//         }),
+//     ],"msg or")
+//     .onValidate({
+//         a: 0,
+//         b: 15,
+//     });
 
-    // VOr.getArrayValue().
-console.log(VOr);
+//     // VOr.getArrayValue().
+// console.log(VOr);
 
 
+
+
+enum a {
+    asd = 1,
+    asds = 2
+}
+
+
+const VEnum = FenextjsValidator()
+    .setName("Enum")
+    .isEnum(a)
+    .onValidate(1);
+    
+console.log(VEnum);

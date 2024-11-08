@@ -117,6 +117,11 @@ export class FenextjsValidatorClass<T = any> {
     /** Value que contiene la validacion de "isWhen" */
     private orValue: FenextjsValidatorClass[] | undefined = undefined;
 
+
+    private enum = false;
+    /** Valor que contiene las reglas de validación para cada propiedad del objeto en la validación "isEnum". */
+    private enumValue: object | undefined = undefined;
+
     /** Mensaje personalizado para error */
     private messageError: {
         [id in
@@ -137,7 +142,8 @@ export class FenextjsValidatorClass<T = any> {
             | "isRegex"
             | "isEmail"
             | "isCustom"
-            | "isOr"]?: string | undefined;
+            | "isOr"
+            | "isEnum"]?: string | undefined;
     } = {};
 
     /**
@@ -1000,6 +1006,43 @@ export class FenextjsValidatorClass<T = any> {
         return this;
     }
 
+
+
+    /**
+     * Método para habilitar la validación "isEnum".
+     * Establece la regla de que los comparacion cuando sea correcto la validacion.
+     * @returns Instancia de FenextjsValidatorClass.
+     */
+    isEnum(data: object, msg?: string) {
+        this.enum = true;
+        this.enumValue = data;
+        this.messageError.isEnum = msg;
+        return this;
+    }
+    /**
+     * Método privado que valida la regla "onEnum".
+     * Verifica si los datos cumplen con la comparacion con enumValue.
+     * @throws {ErrorInputInvalid} Si los datos no cumplen con la compracion.
+     * @private
+     */
+    onEnum() {
+        // Si la validación "isEnum" no está habilitada, no se hace nada.
+        if (!this.enum) {
+            return;
+        }
+        // Si la validación de datos necesarios no existen, no se hace nada.
+        if (!this.enumValue) {
+            return;
+        }
+
+        // Si la validación de datos sean cumplan con el regex.
+        if (!Object.values(this.enumValue).includes(this.data)) {
+            this.onError(ErrorCode.INPUT_INVALID, this.messageError?.isEnum);
+            return;
+        }
+    }
+
+
     /**
      * Método para validar los datos proporcionados según las reglas establecidas.
      * Ejecuta todas las reglas de validación habilitadas previamente para los datos.
@@ -1029,6 +1072,7 @@ export class FenextjsValidatorClass<T = any> {
             this.onCompareRef();
             this.onCustom();
             this.onOr();
+            this.onEnum();
 
             // Si todas las reglas de validación se cumplen, retorna true para indicar que los datos son válidos.
             return true;

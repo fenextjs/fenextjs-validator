@@ -90,6 +90,9 @@ export declare class FenextjsValidatorClass<T = any> {
     private or;
     /** Value que contiene la validacion de "isWhen" */
     private orValue;
+    private enum;
+    /** Valor que contiene las reglas de validación para cada propiedad del objeto en la validación "isEnum". */
+    private enumValue;
     /** Mensaje personalizado para error */
     private messageError;
     /**
@@ -417,6 +420,19 @@ export declare class FenextjsValidatorClass<T = any> {
      * @private
      */
     onOr(): this | undefined;
+    /**
+     * Método para habilitar la validación "isEnum".
+     * Establece la regla de que los comparacion cuando sea correcto la validacion.
+     * @returns Instancia de FenextjsValidatorClass.
+     */
+    isEnum(data: object, msg?: string): this;
+    /**
+     * Método privado que valida la regla "onEnum".
+     * Verifica si los datos cumplen con la comparacion con enumValue.
+     * @throws {ErrorInputInvalid} Si los datos no cumplen con la compracion.
+     * @private
+     */
+    onEnum(): void;
     /**
      * Método para validar los datos proporcionados según las reglas establecidas.
      * Ejecuta todas las reglas de validación habilitadas previamente para los datos.

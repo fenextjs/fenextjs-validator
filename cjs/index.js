@@ -79,6 +79,9 @@ class FenextjsValidatorClass {
     or = false;
     /** Value que contiene la validacion de "isWhen" */
     orValue = undefined;
+    enum = false;
+    /** Valor que contiene las reglas de validación para cada propiedad del objeto en la validación "isEnum". */
+    enumValue = undefined;
     /** Mensaje personalizado para error */
     messageError = {};
     /**
@@ -873,6 +876,38 @@ class FenextjsValidatorClass {
         return this;
     }
     /**
+     * Método para habilitar la validación "isEnum".
+     * Establece la regla de que los comparacion cuando sea correcto la validacion.
+     * @returns Instancia de FenextjsValidatorClass.
+     */
+    isEnum(data, msg) {
+        this.enum = true;
+        this.enumValue = data;
+        this.messageError.isEnum = msg;
+        return this;
+    }
+    /**
+     * Método privado que valida la regla "onEnum".
+     * Verifica si los datos cumplen con la comparacion con enumValue.
+     * @throws {ErrorInputInvalid} Si los datos no cumplen con la compracion.
+     * @private
+     */
+    onEnum() {
+        // Si la validación "isEnum" no está habilitada, no se hace nada.
+        if (!this.enum) {
+            return;
+        }
+        // Si la validación de datos necesarios no existen, no se hace nada.
+        if (!this.enumValue) {
+            return;
+        }
+        // Si la validación de datos sean cumplan con el regex.
+        if (!Object.values(this.enumValue).includes(this.data)) {
+            this.onError(fenextjs_interface_1.ErrorCode.INPUT_INVALID, this.messageError?.isEnum);
+            return;
+        }
+    }
+    /**
      * Método para validar los datos proporcionados según las reglas establecidas.
      * Ejecuta todas las reglas de validación habilitadas previamente para los datos.
      * @param d - Datos que se deben validar.
@@ -900,6 +935,7 @@ class FenextjsValidatorClass {
             this.onCompareRef();
             this.onCustom();
             this.onOr();
+            this.onEnum();
             // Si todas las reglas de validación se cumplen, retorna true para indicar que los datos son válidos.
             return true;
         }

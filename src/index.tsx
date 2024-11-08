@@ -1087,6 +1087,6 @@ export class FenextjsValidatorClass<T = any> {
  *
  * @returns {FenextjsValidatorClass} - Una nueva instancia de la clase FenextjsValidatorClass que se utilizará para definir reglas de validación y validar datos.
  */
-export const FenextjsValidator = <T = any>(
+export const FenextjsValidator = <T = any,>(
     props?: FenextjsValidatorClassConstructorProps,
 ) => new FenextjsValidatorClass<T>(props);

@@ -672,7 +672,7 @@ validator.isWhen({
           id: "data",
           type: "RegExp",
           require: true,
-          description: "Expresión regular con la que los datos deben coincidir para que la validación sea exitosa.",
+          description: "Expresión regular con la que los datos deben coincidir para que la validación sea éxitosa.",
         },
         {
           id: "msg",

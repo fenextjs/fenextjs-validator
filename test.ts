@@ -14,7 +14,7 @@ import { FenextjsValidator } from "./src";
 // // Esto indica que el valor proporcionado para la validación está vacío, lo que no cumple con la regla de "isRequired".
 
 // // Nota: Si el valor proporcionado en "onValidate()" hubiera sido diferente de una cadena vacía,
-// // la validación habría sido exitosa, y el resultado habría sido "true" (indicando que el valor es válido).
+// // la validación habría sido éxitosa, y el resultado habría sido "true" (indicando que el valor es válido).
 
 // // Ejemplo: Crear un validador y establecer la regla "isBoolean"
 // const ValidateIsBoolean = FenextjsValidator()
@@ -28,7 +28,7 @@ import { FenextjsValidator } from "./src";
 // // Esto indica que el valor proporcionado para la validación ("false" en este caso) no es un booleano válido.
 
 // // Nota: Si el valor proporcionado en "onValidate()" hubiera sido "true" (valor booleano válido),
-// // la validación habría sido exitosa, y el resultado habría sido "true" (indicando que el valor es válido).
+// // la validación habría sido éxitosa, y el resultado habría sido "true" (indicando que el valor es válido).
 
 // // Ejemplo: Crear un validador y establecer la regla "isEqual"
 // const ValidateIsEqual = FenextjsValidator()
@@ -49,7 +49,7 @@ import { FenextjsValidator } from "./src";
 // // Esto indica que el valor proporcionado para la validación ("bbbb" en este caso) no es igual al valor esperado "aaaa".
 
 // // Nota: Si el valor proporcionado en "onValidate()" hubiera sido "aaaa" (valor igual al valor esperado),
-// // la validación habría sido exitosa, y el resultado habría sido "true" (indicando que el valor es válido).
+// // la validación habría sido éxitosa, y el resultado habría sido "true" (indicando que el valor es válido).
 
 // // Ejemplo: Crear un validador y establecer la regla "isNumber"
 // const ValidateIsNumber = FenextjsValidator()
@@ -62,7 +62,7 @@ import { FenextjsValidator } from "./src";
 // // El mensaje de este objeto puede ser algo como "Invalid Input [FenextjsValidator]".
 // // Esto indica que el valor proporcionado para la validación ("not Number" en este caso) no es un número válido.
 
-// // Nota: Si el valor proporcionado en "onValidate()" hubiera sido un número, la validación habría sido exitosa,
+// // Nota: Si el valor proporcionado en "onValidate()" hubiera sido un número, la validación habría sido éxitosa,
 // // y el resultado habría sido "true" (indicando que el valor es válido).
 
 // // Ejemplo: Crear un validador y establecer la regla "isString"
@@ -76,7 +76,7 @@ import { FenextjsValidator } from "./src";
 // // El mensaje de este objeto puede ser algo como "Invalid Input [FenextjsValidator]".
 // // Esto indica que el valor proporcionado para la validación ({}, un objeto) no es una cadena de texto válida.
 
-// // Nota: Si el valor proporcionado en "onValidate()" hubiera sido una cadena de texto, la validación habría sido exitosa,
+// // Nota: Si el valor proporcionado en "onValidate()" hubiera sido una cadena de texto, la validación habría sido éxitosa,
 // // y el resultado habría sido "true" (indicando que el valor es válido).
 
 // // Ejemplo: Crear un validador y establecer la regla "isObject" con una regla de validación para la propiedad "key1"
@@ -87,7 +87,7 @@ import { FenextjsValidator } from "./src";
 //         key1: "not Equal", // Realizar la validación con el objeto { key1: "not Equal" }
 
 //         // Nota: Si el valor de la propiedad "key1" hubiera sido "aa" (una cadena de texto igual a "aa"),
-//         // la validación habría sido exitosa, y el resultado habría sido "true" (indicando que el valor es válido).
+//         // la validación habría sido éxitosa, y el resultado habría sido "true" (indicando que el valor es válido).
 //     });
 
 // console.log(ValidateIsObject);
@@ -130,7 +130,7 @@ import { FenextjsValidator } from "./src";
 // // Esto indica que el valor proporcionado para la validación ("NO" en este caso) no cumple con la regla de longitud mínima.
 
 // // Nota: Si el valor proporcionado en "onValidate()" hubiera sido una cadena con al menos 3 caracteres (por ejemplo, "YES"),
-// // la validación habría sido exitosa, y el resultado habría sido "true" (indicando que el valor es válido).
+// // la validación habría sido éxitosa, y el resultado habría sido "true" (indicando que el valor es válido).
 
 // // Ejemplo: Crear un validador y establecer las reglas "isString" y "isMinOrEqual" (longitud mínima 3 caracteres o igual)
 // const ValidateIsMinOrEqual = FenextjsValidator()
@@ -144,7 +144,7 @@ import { FenextjsValidator } from "./src";
 // // Esto indica que el valor proporcionado para la validación ("aaa" en este caso) cumple con la regla de longitud mínima (3 caracteres).
 
 // // Nota: Si el valor proporcionado en "onValidate()" hubiera sido una cadena con menos de 3 caracteres (por ejemplo, "aa"),
-// // la validación habría sido exitosa, y el resultado también habría sido "true" (indicando que el valor es válido).
+// // la validación habría sido éxitosa, y el resultado también habría sido "true" (indicando que el valor es válido).
 
 // // Ejemplo: Crear un validador y establecer las reglas "isNumber" e "isMax" (valor máximo 3)
 // const ValidateIsMax = FenextjsValidator()
@@ -159,7 +159,7 @@ import { FenextjsValidator } from "./src";
 // // Esto indica que el valor proporcionado para la validación (20 en este caso) es mayor que el valor máximo permitido (3).
 
 // // Nota: Si el valor proporcionado en "onValidate()" hubiera sido un número menor o igual a 3 (por ejemplo, 2),
-// // la validación habría sido exitosa, y el resultado habría sido "true" (indicando que el valor es válido).
+// // la validación habría sido éxitosa, y el resultado habría sido "true" (indicando que el valor es válido).
 
 // // Ejemplo: Crear un validador y establecer las reglas "isString" e "isMaxOrEqual" (longitud máxima 3 caracteres o igual)
 // const ValidateIsMaxOrEqual = FenextjsValidator()
@@ -173,7 +173,7 @@ import { FenextjsValidator } from "./src";
 // // Esto indica que el valor proporcionado para la validación ("aaa" en este caso) cumple con la regla de longitud máxima o es igual a 3 caracteres.
 
 // // Nota: Si el valor proporcionado en "onValidate()" hubiera sido una cadena con más de 3 caracteres (por ejemplo, "aaaa"),
-// // la validación habría sido exitosa, y el resultado también habría sido "true" (indicando que el valor es válido).
+// // la validación habría sido éxitosa, y el resultado también habría sido "true" (indicando que el valor es válido).
 
 // // Ejemplo: Crear un validador y establecer las reglas "isDate" e "isMax" (fecha máxima: 100)
 // const ValidateIsDate = FenextjsValidator()
@@ -188,7 +188,7 @@ import { FenextjsValidator } from "./src";
 // // Esto indica que la fecha proporcionada para la validación (new Date(10) en este caso) es posterior a la fecha máxima permitida (new Date(100)).
 
 // // Nota: Si la fecha proporcionada en "onValidate()" hubiera sido una fecha anterior o igual a new Date(100),
-// // la validación habría sido exitosa, y el resultado habría sido "true" (indicando que el valor es válido).
+// // la validación habría sido éxitosa, y el resultado habría sido "true" (indicando que el valor es válido).
 
 // // Ejemplo: Crear un validador y establecer la regla "isLength" (longitud debe ser 4 caracteres)
 // const ValidateIsLength = FenextjsValidator()
@@ -202,7 +202,7 @@ import { FenextjsValidator } from "./src";
 // // Esto indica que la cadena proporcionada para la validación ("tesing" en este caso) no cumple con la regla de longitud (4 caracteres).
 
 // // Nota: Si la cadena proporcionada en "onValidate()" hubiera sido una cadena de 4 caracteres (por ejemplo, "test"),
-// // la validación habría sido exitosa, y el resultado habría sido "true" (indicando que el valor es válido).
+// // la validación habría sido éxitosa, y el resultado habría sido "true" (indicando que el valor es válido).
 
 // // Definir la interfaz que describe la estructura de datos para la validación
 // interface ValidateIsCompareRefInteface {

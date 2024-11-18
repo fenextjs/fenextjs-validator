@@ -1,39 +1,36 @@
-export default {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = {
     id: "FenextjsValidator",
     name: "FenextjsValidator",
-    description:
-        "Clase para validar datos de entrada, proporcionando métodos para verificar requerimientos, longitudes, y tipos específicos de validaciones.",
+    description: "Clase para validar datos de entrada, proporcionando métodos para verificar requerimientos, longitudes, y tipos específicos de validaciones.",
     useImport: true,
     useBreadcrumb: false,
     functions: [
         {
             id: "isEqual",
             name: "isEqual",
-            description:
-                "Método para definir la validación 'isEqual'. Establece la regla de que los datos deben ser iguales al valor especificado.",
+            description: "Método para definir la validación 'isEqual'. Establece la regla de que los datos deben ser iguales al valor especificado.",
             useImport: false,
             props: [
                 {
                     id: "d",
                     type: "T[] | T",
                     require: true,
-                    description:
-                        "Valor o lista de valores con los que se compararán los datos a validar.",
+                    description: "Valor o lista de valores con los que se compararán los datos a validar.",
                 },
                 {
                     id: "msg",
                     type: "string",
                     require: false,
-                    description:
-                        "Mensaje de error personalizado que se mostrará si la validación falla.",
+                    description: "Mensaje de error personalizado que se mostrará si la validación falla.",
                 },
             ],
             returns: [
                 {
                     id: "this",
                     type: "FenextjsValidatorClass",
-                    description:
-                        "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
+                    description: "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
                 },
             ],
             useExample: [
@@ -54,24 +51,21 @@ validator.isEqual('value1', 'Los valores no son iguales');
         {
             id: "isRequired",
             name: "isRequired",
-            description:
-                "Método para habilitar la validación 'isRequired'. Establece la regla de que los datos deben estar presentes y no ser nulos o indefinidos.",
+            description: "Método para habilitar la validación 'isRequired'. Establece la regla de que los datos deben estar presentes y no ser nulos o indefinidos.",
             useImport: false,
             props: [
                 {
                     id: "msg",
                     type: "string",
                     require: false,
-                    description:
-                        "Mensaje de error personalizado que se mostrará si la validación falla.",
+                    description: "Mensaje de error personalizado que se mostrará si la validación falla.",
                 },
             ],
             returns: [
                 {
                     id: "this",
                     type: "FenextjsValidatorClass",
-                    description:
-                        "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
+                    description: "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
                 },
             ],
             useExample: [
@@ -92,24 +86,21 @@ validator.isRequired('Los datos son obligatorios');
         {
             id: "isBoolean",
             name: "isBoolean",
-            description:
-                "Método para habilitar la validación 'isBoolean'. Establece la regla de que los datos deben ser de tipo booleano.",
+            description: "Método para habilitar la validación 'isBoolean'. Establece la regla de que los datos deben ser de tipo booleano.",
             useImport: false,
             props: [
                 {
                     id: "msg",
                     type: "string",
                     require: false,
-                    description:
-                        "Mensaje de error personalizado que se mostrará si la validación falla.",
+                    description: "Mensaje de error personalizado que se mostrará si la validación falla.",
                 },
             ],
             returns: [
                 {
                     id: "this",
                     type: "FenextjsValidatorClass",
-                    description:
-                        "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
+                    description: "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
                 },
             ],
             useExample: [
@@ -130,24 +121,21 @@ validator.isBoolean('Debe ser un valor booleano');
         {
             id: "isNumber",
             name: "isNumber",
-            description:
-                "Método para habilitar la validación 'isNumber'. Establece la regla de que los datos deben ser de tipo número.",
+            description: "Método para habilitar la validación 'isNumber'. Establece la regla de que los datos deben ser de tipo número.",
             useImport: false,
             props: [
                 {
                     id: "msg",
                     type: "string",
                     require: false,
-                    description:
-                        "Mensaje de error personalizado que se mostrará si la validación falla.",
+                    description: "Mensaje de error personalizado que se mostrará si la validación falla.",
                 },
             ],
             returns: [
                 {
                     id: "this",
                     type: "FenextjsValidatorClass",
-                    description:
-                        "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
+                    description: "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
                 },
             ],
             useExample: [
@@ -168,24 +156,21 @@ validator.isNumber('Debe ser un número');
         {
             id: "isString",
             name: "isString",
-            description:
-                "Método para habilitar la validación 'isString'. Establece la regla de que los datos deben ser de tipo cadena (string).",
+            description: "Método para habilitar la validación 'isString'. Establece la regla de que los datos deben ser de tipo cadena (string).",
             useImport: false,
             props: [
                 {
                     id: "msg",
                     type: "string",
                     require: false,
-                    description:
-                        "Mensaje de error personalizado que se mostrará si la validación falla.",
+                    description: "Mensaje de error personalizado que se mostrará si la validación falla.",
                 },
             ],
             returns: [
                 {
                     id: "this",
                     type: "FenextjsValidatorClass",
-                    description:
-                        "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
+                    description: "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
                 },
             ],
             useExample: [
@@ -206,31 +191,27 @@ validator.isString('Debe ser una cadena');
         {
             id: "isLength",
             name: "isLength",
-            description:
-                "Método para habilitar la validación de longitud. Establece la regla de que los datos deben tener una longitud específica.",
+            description: "Método para habilitar la validación de longitud. Establece la regla de que los datos deben tener una longitud específica.",
             useImport: false,
             props: [
                 {
                     id: "length",
                     type: "number",
                     require: true,
-                    description:
-                        "La longitud que deben tener los datos para que la validación sea válida.",
+                    description: "La longitud que deben tener los datos para que la validación sea válida.",
                 },
                 {
                     id: "msg",
                     type: "string",
                     require: false,
-                    description:
-                        "Mensaje de error personalizado que se mostrará si la validación falla.",
+                    description: "Mensaje de error personalizado que se mostrará si la validación falla.",
                 },
             ],
             returns: [
                 {
                     id: "this",
                     type: "FenextjsValidatorClass",
-                    description:
-                        "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
+                    description: "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
                 },
             ],
             useExample: [
@@ -251,24 +232,21 @@ validator.isLength(5, 'La longitud debe ser 5');
         {
             id: "isDate",
             name: "isDate",
-            description:
-                "Método para habilitar la validación 'isDate'. Establece la regla de que los datos deben ser de tipo Date (fecha).",
+            description: "Método para habilitar la validación 'isDate'. Establece la regla de que los datos deben ser de tipo Date (fecha).",
             useImport: false,
             props: [
                 {
                     id: "msg",
                     type: "string",
                     require: false,
-                    description:
-                        "Mensaje de error personalizado que se mostrará si la validación falla.",
+                    description: "Mensaje de error personalizado que se mostrará si la validación falla.",
                 },
             ],
             returns: [
                 {
                     id: "this",
                     type: "FenextjsValidatorClass",
-                    description:
-                        "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
+                    description: "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
                 },
             ],
             useExample: [
@@ -289,31 +267,27 @@ validator.isDate('Debe ser una fecha válida');
         {
             id: "isObject",
             name: "isObject",
-            description:
-                "Método para habilitar la validación 'isObject'. Establece la regla de que los datos deben ser de tipo objeto.",
+            description: "Método para habilitar la validación 'isObject'. Establece la regla de que los datos deben ser de tipo objeto.",
             useImport: false,
             props: [
                 {
                     id: "obj",
                     type: "{ [id in keyof T]?: FenextjsValidatorClass } | undefined",
                     require: true,
-                    description:
-                        "Objeto con las reglas de validación para cada propiedad del objeto.",
+                    description: "Objeto con las reglas de validación para cada propiedad del objeto.",
                 },
                 {
                     id: "msg",
                     type: "string",
                     require: false,
-                    description:
-                        "Mensaje de error personalizado que se mostrará si la validación falla.",
+                    description: "Mensaje de error personalizado que se mostrará si la validación falla.",
                 },
             ],
             returns: [
                 {
                     id: "this",
                     type: "FenextjsValidatorClass",
-                    description:
-                        "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
+                    description: "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
                 },
             ],
             useExample: [
@@ -338,31 +312,27 @@ validator.isObject({
         {
             id: "isArray",
             name: "isArray",
-            description:
-                "Método para habilitar la validación 'isArray'. Establece la regla de que los datos deben ser un array.",
+            description: "Método para habilitar la validación 'isArray'. Establece la regla de que los datos deben ser un array.",
             useImport: false,
             props: [
                 {
                     id: "item",
                     type: "FenextjsValidatorClass | undefined",
                     require: false,
-                    description:
-                        "Instancia de FenextjsValidatorClass que define las reglas de validación para cada elemento del array.",
+                    description: "Instancia de FenextjsValidatorClass que define las reglas de validación para cada elemento del array.",
                 },
                 {
                     id: "msg",
                     type: "string",
                     require: false,
-                    description:
-                        "Mensaje de error personalizado que se mostrará si la validación falla.",
+                    description: "Mensaje de error personalizado que se mostrará si la validación falla.",
                 },
             ],
             returns: [
                 {
                     id: "this",
                     type: "FenextjsValidatorClass",
-                    description:
-                        "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
+                    description: "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
                 },
             ],
             useExample: [
@@ -391,31 +361,27 @@ validator.isArray(
         {
             id: "isMin",
             name: "isMin",
-            description:
-                "Método para habilitar la validación 'isMin'. Establece la regla de que los datos deben ser mayores que un valor específico.",
+            description: "Método para habilitar la validación 'isMin'. Establece la regla de que los datos deben ser mayores que un valor específico.",
             useImport: false,
             props: [
                 {
                     id: "min",
                     type: "number | Date",
                     require: true,
-                    description:
-                        "Valor mínimo que los datos deben superar para que la validación sea válida.",
+                    description: "Valor mínimo que los datos deben superar para que la validación sea válida.",
                 },
                 {
                     id: "msg",
                     type: "string",
                     require: false,
-                    description:
-                        "Mensaje de error personalizado que se mostrará si la validación falla.",
+                    description: "Mensaje de error personalizado que se mostrará si la validación falla.",
                 },
             ],
             returns: [
                 {
                     id: "this",
                     type: "FenextjsValidatorClass",
-                    description:
-                        "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
+                    description: "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
                 },
             ],
             useExample: [
@@ -442,31 +408,27 @@ validator.isMin(new Date('2024-01-01'));
         {
             id: "isMinOrEqual",
             name: "isMinOrEqual",
-            description:
-                "Método para habilitar la validación 'isMinOrEqual'. Establece la regla de que los datos deben ser mayores o iguales que un valor específico.",
+            description: "Método para habilitar la validación 'isMinOrEqual'. Establece la regla de que los datos deben ser mayores o iguales que un valor específico.",
             useImport: false,
             props: [
                 {
                     id: "min",
                     type: "number | Date",
                     require: true,
-                    description:
-                        "Valor mínimo que los datos deben superar o igualar para que la validación sea válida.",
+                    description: "Valor mínimo que los datos deben superar o igualar para que la validación sea válida.",
                 },
                 {
                     id: "msg",
                     type: "string",
                     require: false,
-                    description:
-                        "Mensaje de error personalizado que se mostrará si la validación falla.",
+                    description: "Mensaje de error personalizado que se mostrará si la validación falla.",
                 },
             ],
             returns: [
                 {
                     id: "this",
                     type: "FenextjsValidatorClass",
-                    description:
-                        "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
+                    description: "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
                 },
             ],
             useExample: [
@@ -493,31 +455,27 @@ validator.isMinOrEqual(new Date('2024-01-01'));
         {
             id: "isMax",
             name: "isMax",
-            description:
-                "Método para habilitar la validación 'isMax'. Establece la regla de que los datos deben ser menores que un valor específico.",
+            description: "Método para habilitar la validación 'isMax'. Establece la regla de que los datos deben ser menores que un valor específico.",
             useImport: false,
             props: [
                 {
                     id: "max",
                     type: "number | Date",
                     require: true,
-                    description:
-                        "Valor máximo que los datos deben ser menores que él para que la validación sea válida.",
+                    description: "Valor máximo que los datos deben ser menores que él para que la validación sea válida.",
                 },
                 {
                     id: "msg",
                     type: "string",
                     require: false,
-                    description:
-                        "Mensaje de error personalizado que se mostrará si la validación falla.",
+                    description: "Mensaje de error personalizado que se mostrará si la validación falla.",
                 },
             ],
             returns: [
                 {
                     id: "this",
                     type: "FenextjsValidatorClass",
-                    description:
-                        "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
+                    description: "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
                 },
             ],
             useExample: [
@@ -544,31 +502,27 @@ validator.isMax(new Date('2024-01-01'));
         {
             id: "isMaxOrEqual",
             name: "isMaxOrEqual",
-            description:
-                "Método para habilitar la validación 'isMaxOrEqual'. Establece la regla de que los datos deben ser menores o iguales que un valor específico.",
+            description: "Método para habilitar la validación 'isMaxOrEqual'. Establece la regla de que los datos deben ser menores o iguales que un valor específico.",
             useImport: false,
             props: [
                 {
                     id: "max",
                     type: "number | Date",
                     require: true,
-                    description:
-                        "Valor máximo que los datos deben ser menores o iguales que él para que la validación sea válida.",
+                    description: "Valor máximo que los datos deben ser menores o iguales que él para que la validación sea válida.",
                 },
                 {
                     id: "msg",
                     type: "string",
                     require: false,
-                    description:
-                        "Mensaje de error personalizado que se mostrará si la validación falla.",
+                    description: "Mensaje de error personalizado que se mostrará si la validación falla.",
                 },
             ],
             returns: [
                 {
                     id: "this",
                     type: "FenextjsValidatorClass",
-                    description:
-                        "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
+                    description: "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
                 },
             ],
             useExample: [
@@ -595,31 +549,27 @@ validator.isMaxOrEqual(new Date('2024-01-01'));
         {
             id: "isCompareRef",
             name: "isCompareRef",
-            description:
-                "Método para habilitar la comparación de valores de referencia. Establece la regla de que los datos deben ser iguales a otro valor de referencia almacenado en la instancia.",
+            description: "Método para habilitar la comparación de valores de referencia. Establece la regla de que los datos deben ser iguales a otro valor de referencia almacenado en la instancia.",
             useImport: false,
             props: [
                 {
                     id: "refKey",
                     type: "string",
                     require: true,
-                    description:
-                        "La clave que identifica el valor de referencia almacenado en la instancia para la comparación.",
+                    description: "La clave que identifica el valor de referencia almacenado en la instancia para la comparación.",
                 },
                 {
                     id: "msg",
                     type: "string",
                     require: false,
-                    description:
-                        "Mensaje de error personalizado que se mostrará si la validación falla.",
+                    description: "Mensaje de error personalizado que se mostrará si la validación falla.",
                 },
             ],
             returns: [
                 {
                     id: "this",
                     type: "FenextjsValidatorClass",
-                    description:
-                        "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
+                    description: "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
                 },
             ],
             useExample: [
@@ -640,57 +590,48 @@ validator.isCompareRef('myRefKey', 'Los valores no coinciden');
         {
             id: "isWhen",
             name: "isWhen",
-            description:
-                "Método para habilitar la validación 'isWhen'. Establece la regla de comparación cuando se cumpla una condición específica.",
+            description: "Método para habilitar la validación 'isWhen'. Establece la regla de comparación cuando se cumpla una condición específica.",
             useImport: false,
             props: [
                 {
                     id: "data",
                     type: "FenextjsValidatorClassIsWhenProps",
                     require: true,
-                    description:
-                        "Objeto que contiene las reglas de validación a aplicar cuando la condición especificada sea verdadera. La estructura de 'FenextjsValidatorClassIsWhenProps' incluye los campos 'key', 'is', 'then', 'otherwise', y opcionalmente 'dataIsCurrent'.",
+                    description: "Objeto que contiene las reglas de validación a aplicar cuando la condición especificada sea verdadera. La estructura de 'FenextjsValidatorClassIsWhenProps' incluye los campos 'key', 'is', 'then', 'otherwise', y opcionalmente 'dataIsCurrent'.",
                 },
             ],
             returns: [
                 {
                     id: "this",
                     type: "FenextjsValidatorClass",
-                    description:
-                        "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
+                    description: "Devuelve la instancia de la clase para permitir el encadenamiento de métodos.",
                 },
             ],
             extras: [
                 {
                     id: "condiciones",
                     title: "Condiciones en 'isWhen'",
-                    description:
-                        "El método 'isWhen' permite aplicar validaciones condicionales basadas en los valores de las propiedades. A continuación se describen las posibles condiciones y el comportamiento de cada una:",
+                    description: "El método 'isWhen' permite aplicar validaciones condicionales basadas en los valores de las propiedades. A continuación se describen las posibles condiciones y el comportamiento de cada una:",
                     tableItems: [
                         {
                             Condición: "key",
-                            Descripción:
-                                "El campo 'key' es el nombre de la propiedad a evaluar. Se usará para determinar si la validación debe aplicarse a esa propiedad.",
+                            Descripción: "El campo 'key' es el nombre de la propiedad a evaluar. Se usará para determinar si la validación debe aplicarse a esa propiedad.",
                         },
                         {
                             Condición: "is",
-                            Descripción:
-                                "La propiedad 'is' contiene una instancia de 'FenextjsValidatorClass' que define las reglas de validación para aplicar cuando se cumpla la condición.",
+                            Descripción: "La propiedad 'is' contiene una instancia de 'FenextjsValidatorClass' que define las reglas de validación para aplicar cuando se cumpla la condición.",
                         },
                         {
                             Condición: "then",
-                            Descripción:
-                                "La propiedad 'then' contiene una instancia de 'FenextjsValidatorClass' que define las reglas de validación a aplicar si la condición es verdadera.",
+                            Descripción: "La propiedad 'then' contiene una instancia de 'FenextjsValidatorClass' que define las reglas de validación a aplicar si la condición es verdadera.",
                         },
                         {
                             Condición: "otherwise",
-                            Descripción:
-                                "La propiedad 'otherwise' contiene una instancia de 'FenextjsValidatorClass' que define las reglas de validación a aplicar si la condición es falsa. Este campo es opcional.",
+                            Descripción: "La propiedad 'otherwise' contiene una instancia de 'FenextjsValidatorClass' que define las reglas de validación a aplicar si la condición es falsa. Este campo es opcional.",
                         },
                         {
                             Condición: "dataIsCurrent",
-                            Descripción:
-                                "La propiedad 'dataIsCurrent' es un valor booleano opcional que indica si se debe comparar la propiedad con los datos actuales. Si no se establece, se asumirá como 'false'.",
+                            Descripción: "La propiedad 'dataIsCurrent' es un valor booleano opcional que indica si se debe comparar la propiedad con los datos actuales. Si no se establece, se asumirá como 'false'.",
                         },
                     ],
                 },
@@ -725,31 +666,27 @@ validator.isWhen({
         {
             id: "isRegex",
             name: "isRegex",
-            description:
-                "Método para habilitar la validación 'isRegex'. Establece la regla de que los datos deben coincidir con una expresión regular especificada.",
+            description: "Método para habilitar la validación 'isRegex'. Establece la regla de que los datos deben coincidir con una expresión regular especificada.",
             useImport: false,
             props: [
                 {
                     id: "data",
                     type: "RegExp",
                     require: true,
-                    description:
-                        "Expresión regular con la que los datos deben coincidir para que la validación sea éxitosa.",
+                    description: "Expresión regular con la que los datos deben coincidir para que la validación sea éxitosa.",
                 },
                 {
                     id: "msg",
                     type: "string",
                     require: false,
-                    description:
-                        "Mensaje de error personalizado que se muestra si la validación falla.",
+                    description: "Mensaje de error personalizado que se muestra si la validación falla.",
                 },
             ],
             returns: [
                 {
                     id: "this",
                     type: "FenextjsValidatorClass",
-                    description:
-                        "Devuelve la instancia actual de la clase FenextjsValidatorClass, lo que permite el encadenamiento de métodos.",
+                    description: "Devuelve la instancia actual de la clase FenextjsValidatorClass, lo que permite el encadenamiento de métodos.",
                 },
             ],
             useExample: [
@@ -763,24 +700,21 @@ validator.isRegex(/^[a-zA-Z0-9]+$/, 'El valor debe contener solo caracteres alfa
         {
             id: "isEmail",
             name: "isEmail",
-            description:
-                "Método para habilitar la validación 'isEmail'. Establece la regla de que los datos deben ser un correo electrónico válido.",
+            description: "Método para habilitar la validación 'isEmail'. Establece la regla de que los datos deben ser un correo electrónico válido.",
             useImport: false,
             props: [
                 {
                     id: "msg",
                     type: "string",
                     require: false,
-                    description:
-                        "Mensaje de error personalizado que se muestra si la validación falla.",
+                    description: "Mensaje de error personalizado que se muestra si la validación falla.",
                 },
             ],
             returns: [
                 {
                     id: "this",
                     type: "FenextjsValidatorClass",
-                    description:
-                        "Devuelve la instancia actual de la clase FenextjsValidatorClass, lo que permite el encadenamiento de métodos.",
+                    description: "Devuelve la instancia actual de la clase FenextjsValidatorClass, lo que permite el encadenamiento de métodos.",
                 },
             ],
             useExample: [
@@ -794,31 +728,27 @@ validator.isEmail('Por favor, ingresa un correo electrónico válido');`,
         {
             id: "isCustom",
             name: "isCustom",
-            description:
-                "Método para habilitar la validación 'onCustom'. Establece la regla de que los datos deben cumplir con una validación personalizada definida por una función.",
+            description: "Método para habilitar la validación 'onCustom'. Establece la regla de que los datos deben cumplir con una validación personalizada definida por una función.",
             useImport: false,
             props: [
                 {
                     id: "data",
                     type: "(data: T) => true | ErrorFenextjs",
                     require: true,
-                    description:
-                        "Función que define la validación personalizada. Si la validación falla, debe retornar un error de tipo ErrorFenextjs.",
+                    description: "Función que define la validación personalizada. Si la validación falla, debe retornar un error de tipo ErrorFenextjs.",
                 },
                 {
                     id: "msg",
                     type: "string",
                     require: false,
-                    description:
-                        "Mensaje de error personalizado que se muestra si la validación falla.",
+                    description: "Mensaje de error personalizado que se muestra si la validación falla.",
                 },
             ],
             returns: [
                 {
                     id: "this",
                     type: "FenextjsValidatorClass",
-                    description:
-                        "Devuelve la instancia actual de la clase FenextjsValidatorClass, lo que permite el encadenamiento de métodos.",
+                    description: "Devuelve la instancia actual de la clase FenextjsValidatorClass, lo que permite el encadenamiento de métodos.",
                 },
             ],
             useExample: [
@@ -835,31 +765,27 @@ validator.isCustom((data) => {
         {
             id: "isOr",
             name: "isOr",
-            description:
-                "Método para definir la validación 'isOr'. Establece la regla de que los datos deben cumplir al menos una validación de las proporcionadas.",
+            description: "Método para definir la validación 'isOr'. Establece la regla de que los datos deben cumplir al menos una validación de las proporcionadas.",
             useImport: false,
             props: [
                 {
                     id: "d",
                     type: "FenextjsValidatorClass[]",
                     require: true,
-                    description:
-                        "Lista de instancias de FenextjsValidatorClass que representan las validaciones a comparar con los datos.",
+                    description: "Lista de instancias de FenextjsValidatorClass que representan las validaciones a comparar con los datos.",
                 },
                 {
                     id: "msg",
                     type: "string",
                     require: false,
-                    description:
-                        "Mensaje de error personalizado que se muestra si la validación falla.",
+                    description: "Mensaje de error personalizado que se muestra si la validación falla.",
                 },
             ],
             returns: [
                 {
                     id: "this",
                     type: "FenextjsValidatorClass",
-                    description:
-                        "Devuelve la instancia actual de la clase FenextjsValidatorClass, lo que permite el encadenamiento de métodos.",
+                    description: "Devuelve la instancia actual de la clase FenextjsValidatorClass, lo que permite el encadenamiento de métodos.",
                 },
             ],
             useExample: [
@@ -875,31 +801,27 @@ validator.isOr([validator1, validator2], 'Debe ser un valor requerido o un email
         {
             id: "isEnum",
             name: "isEnum",
-            description:
-                "Método para habilitar la validación 'isEnum'. Establece la regla de que los datos deben coincidir con uno de los valores especificados en un objeto enumerado.",
+            description: "Método para habilitar la validación 'isEnum'. Establece la regla de que los datos deben coincidir con uno de los valores especificados en un objeto enumerado.",
             useImport: false,
             props: [
                 {
                     id: "data",
                     type: "object",
                     require: true,
-                    description:
-                        "Objeto que define los valores permitidos para la validación. Los datos deben coincidir con uno de estos valores.",
+                    description: "Objeto que define los valores permitidos para la validación. Los datos deben coincidir con uno de estos valores.",
                 },
                 {
                     id: "msg",
                     type: "string",
                     require: false,
-                    description:
-                        "Mensaje de error personalizado que se muestra si la validación falla.",
+                    description: "Mensaje de error personalizado que se muestra si la validación falla.",
                 },
             ],
             returns: [
                 {
                     id: "this",
                     type: "FenextjsValidatorClass",
-                    description:
-                        "Devuelve la instancia actual de la clase FenextjsValidatorClass, lo que permite el encadenamiento de métodos.",
+                    description: "Devuelve la instancia actual de la clase FenextjsValidatorClass, lo que permite el encadenamiento de métodos.",
                 },
             ],
             useExample: [
@@ -918,30 +840,26 @@ validator.isEnum(enumValues, 'El valor debe estar en el enum especificado');`,
         {
             id: "onValidate",
             name: "onValidate",
-            description:
-                "Método para validar los datos proporcionados según las reglas establecidas. Ejecuta todas las reglas de validación habilitadas previamente para los datos.",
+            description: "Método para validar los datos proporcionados según las reglas establecidas. Ejecuta todas las reglas de validación habilitadas previamente para los datos.",
             useImport: false,
             props: [
                 {
                     id: "d",
                     type: "T",
                     require: true,
-                    description:
-                        "Datos que se deben validar, los cuales serán evaluados contra las reglas de validación previamente habilitadas.",
+                    description: "Datos que se deben validar, los cuales serán evaluados contra las reglas de validación previamente habilitadas.",
                 },
             ],
             returns: [
                 {
                     id: "true",
                     type: "boolean",
-                    description:
-                        "Devuelve 'true' si los datos cumplen con todas las reglas de validación habilitadas.",
+                    description: "Devuelve 'true' si los datos cumplen con todas las reglas de validación habilitadas.",
                 },
                 {
                     id: "ErrorFenextjs",
                     type: "ErrorFenextjs",
-                    description:
-                        "Si alguna regla de validación falla, retorna el error que indica qué regla de validación falló.",
+                    description: "Si alguna regla de validación falla, retorna el error que indica qué regla de validación falló.",
                 },
             ],
             useExample: [
@@ -962,16 +880,14 @@ if (result === true) {
         {
             id: "getObjectValidator",
             name: "getObjectValidator",
-            description:
-                "Método para obtener la validación 'isObject'. Devuelve el objeto con las reglas de validación definidas para las propiedades del objeto.",
+            description: "Método para obtener la validación 'isObject'. Devuelve el objeto con las reglas de validación definidas para las propiedades del objeto.",
             useImport: false,
             props: [],
             returns: [
                 {
                     id: "objectValue",
                     type: "{ [id in keyof T]?: FenextjsValidatorClass } | undefined",
-                    description:
-                        "Devuelve el objeto con las reglas de validación para cada propiedad si 'isObject' está habilitado, o undefined si no lo está.",
+                    description: "Devuelve el objeto con las reglas de validación para cada propiedad si 'isObject' está habilitado, o undefined si no lo está.",
                 },
             ],
             useExample: [
@@ -986,16 +902,14 @@ console.log(objectValidator);`,
         {
             id: "getArrayValue",
             name: "getArrayValue",
-            description:
-                "Método público para obtener el valor de validación de array. Devuelve las reglas de validación definidas para los elementos del array.",
+            description: "Método público para obtener el valor de validación de array. Devuelve las reglas de validación definidas para los elementos del array.",
             useImport: false,
             props: [],
             returns: [
                 {
                     id: "arrayValue",
                     type: "FenextjsValidatorClassIsWhenProps | undefined",
-                    description:
-                        "Devuelve el valor de validación del array si está habilitada, o undefined si no lo está.",
+                    description: "Devuelve el valor de validación del array si está habilitada, o undefined si no lo está.",
                 },
             ],
             useExample: [
@@ -1011,14 +925,12 @@ console.log(arrayValidator);`,
             id: "getWhenValue",
             name: "getWhenValue",
             useImport: false,
-            description:
-                "Método público para obtener el valor de validación de 'when'. Devuelve las condiciones definidas para la validación 'isWhen'.",
+            description: "Método público para obtener el valor de validación de 'when'. Devuelve las condiciones definidas para la validación 'isWhen'.",
             returns: [
                 {
                     id: "this.whenValue",
                     type: "FenextjsValidatorClassIsWhenProps[] | undefined",
-                    description:
-                        "Devuelve el valor de 'when' como un array de objetos de tipo 'FenextjsValidatorClassIsWhenProps', o 'undefined' si no se ha definido.",
+                    description: "Devuelve el valor de 'when' como un array de objetos de tipo 'FenextjsValidatorClassIsWhenProps', o 'undefined' si no se ha definido.",
                 },
             ],
             useExample: [
@@ -1030,3 +942,4 @@ console.log(arrayValidator);`,
         },
     ],
 };
+//# sourceMappingURL=_.doc.js.map

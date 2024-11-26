@@ -1,6 +1,6 @@
 {
     "name": "fenextjs-validator",
-    "version": "4.6.2",
+    "version": "4.6.3",
     "description": "",
     "main": "./cjs/index.js",
     "module": "./cjs/index.js",
@@ -40,8 +40,8 @@
     },
     "homepage": "https://github.com/franciscoblancojn/fenextjs-validator#readme",
     "dependencies": {
-        "fenextjs-error": "3.1.6",
-        "fenextjs-interface": "4.4.0"
+        "fenextjs-error": "3.2.0",
+        "fenextjs-interface": "4.5.0"
     },
     "files": [
         "cjs",

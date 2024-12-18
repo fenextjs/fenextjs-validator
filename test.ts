@@ -1,6 +1,6 @@
 // // Importar la función FenextjsValidator desde el archivo actual ("." representa el archivo actual)
 import { ErrorFenextjs } from "fenextjs-error/cjs/Fenextjs";
-import { FenextjsValidator } from "./src";
+import { FenextjsValidator,FV } from "./src";
 
 // // Ejemplo: Crear un validador y establecer la regla "isRequired"
 // const ValidateIsRequired = FenextjsValidator()
@@ -382,15 +382,31 @@ import { FenextjsValidator } from "./src";
 
 
 
-enum a {
-    asd = 1,
-    asds = 2
-}
+// enum a {
+//     asd = 1,
+//     asds = 2
+// }
 
 
-const VEnum = FenextjsValidator()
-    .setName("Enum")
-    .isEnum(a)
-    .onValidate(1);
+// const VEnum = FenextjsValidator()
+//     .setName("Enum")
+//     .isEnum(a)
+//     .onValidate(1);
     
-console.log(VEnum);
+// console.log(VEnum);
+
+
+
+ const v =
+    FV<{
+        a:string
+        b?:string
+    }>().isObject({
+        a: FV()
+            .isEqual(["1","2"], "msg aaaaaa")
+            .isRequired("msg aaaaaa"),
+        
+    },"asdasd").onValidate({
+        a:"3",
+    })
+console.log(v);

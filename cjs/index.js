@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FenextjsValidator = exports.FenextjsValidatorClass = void 0;
+exports.FV = exports.FenextjsValidator = exports.FenextjsValidatorClass = void 0;
 const Input_1 = require("fenextjs-error/cjs/Input");
 const Fenextjs_1 = require("fenextjs-error/cjs/Fenextjs");
 const fenextjs_interface_1 = require("fenextjs-interface");
@@ -369,7 +369,7 @@ class FenextjsValidatorClass {
         }
         // Comprueba si los datos no son de tipo objeto.
         // Si no son de tipo objeto, lanza un ErrorInputInvalid para indicar que la validación falló.
-        if (typeof this.data !== "object") {
+        if (typeof this.data !== "object" && this.messageError?.isObject) {
             this.onError(fenextjs_interface_1.ErrorCode.INPUT_INVALID, this.messageError?.isObject);
         }
         // Si la validación "isObject"  no se proporcionaron reglas de validación (objectValue), no se hace nada.
@@ -395,7 +395,8 @@ class FenextjsValidatorClass {
             const validator = this.objectValue[key];
             const r = validator.onValidate(this.data?.[key]);
             // Si alguna propiedad no cumple con las reglas de validación, se lanza el error devuelto por la validación.
-            if (r !== true) {
+            if (r instanceof Fenextjs_1.ErrorFenextjs) {
+                this.onError(r.code, r.msg ?? r?.message);
                 throw r;
             }
         }
@@ -957,4 +958,5 @@ exports.FenextjsValidatorClass = FenextjsValidatorClass;
  */
 const FenextjsValidator = (props) => new FenextjsValidatorClass(props);
 exports.FenextjsValidator = FenextjsValidator;
+exports.FV = exports.FenextjsValidator;
 //# sourceMappingURL=index.js.map

@@ -397,16 +397,27 @@ import { FenextjsValidator,FV } from "./src";
 
 
 
- const v =
-    FV<{
-        a:string
-        b?:string
-    }>().isObject({
-        a: FV()
-            .isEqual(["1","2"], "msg aaaaaa")
-            .isRequired("msg aaaaaa"),
+//  const v =
+//     FV<{
+//         a:string
+//         b?:string
+//     }>().isObject({
+//         a: FV()
+//             .isEqual(["1","2"], "msg aaaaaa")
+//             .isRequired("msg aaaaaa"),
         
-    },"asdasd").onValidate({
-        a:"3",
-    })
-console.log(v);
+//     },"asdasd").onValidate({
+//         a:"3",
+//     })
+// console.log(v);
+
+
+export enum SIZE_COMPANY {
+    "1-10"="1-10",
+    "10-50"="10-50",
+    "50+"="50+"
+}
+const VEnum = FV()
+        .isEnum(SIZE_COMPANY, "Ingresa un Tamaño valido.")
+        .isRequired("Ingresa un Tamaño valido.").onValidate("1-10")
+        console.log(VEnum);

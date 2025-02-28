@@ -109,7 +109,7 @@ export class FenextjsValidatorClass<T = any> {
     /** Bandera que indica si los datos deben ser una cadena que cumpla la regla regex. */
     private custom = false;
     /** Valor que contiene las reglas de validación para cada propiedad del objeto en la validación "isRegex". */
-    private customValue: ((data: T) => true | ErrorFenextjs) | undefined =
+    private customValue: ((data: T,parent?: FenextjsValidatorClass) => true | ErrorFenextjs) | undefined =
         undefined;
 
     /** Bandera que indica si los datos deben ser una cadena en la validación "isWhen". */
@@ -944,7 +944,7 @@ export class FenextjsValidatorClass<T = any> {
      * Establece la regla de que los comparacion cuando se cumpla una validacion custom.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isCustom(data: (data: T) => true | ErrorFenextjs, msg?: string) {
+    isCustom(data: (data: T,parent?: FenextjsValidatorClass) => true | ErrorFenextjs, msg?: string) {
         this.custom = true;
         this.customValue = data;
         this.messageError.isCustom = msg;
@@ -967,7 +967,7 @@ export class FenextjsValidatorClass<T = any> {
         if (this.data == undefined) {
             return;
         }
-        const v = this.customValue(this.data);
+        const v = this.customValue(this.data,this?.parent);
         if (v != true) {
             this.onError(v.code, this.messageError?.isCustom ?? v.message);
             return;

@@ -125,6 +125,14 @@ class FenextjsValidatorClass {
         return this.name;
     }
     /**
+     * Método public para obtener el valor de data.
+     * @returns {T | undefined}
+     * @public
+     */
+    getData() {
+        return this.data;
+    }
+    /**
      * Método para establecer el padre de la instancia actual de FenextjsValidatorClass.
      * El padre es otra instancia de FenextjsValidatorClass que se utiliza como contexto superior.
      *

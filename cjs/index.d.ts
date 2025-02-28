@@ -397,7 +397,7 @@ export declare class FenextjsValidatorClass<T = any> {
      * Establece la regla de que los comparacion cuando se cumpla una validacion custom.
      * @returns Instancia de FenextjsValidatorClass.
      */
-    isCustom(data: (data: T) => true | ErrorFenextjs, msg?: string): this;
+    isCustom(data: (data: T, parent?: FenextjsValidatorClass) => true | ErrorFenextjs, msg?: string): this;
     /**
      * Método privado que valida la regla "onCustom".
      * Verifica si los datos cumplen con la comparacion custom.

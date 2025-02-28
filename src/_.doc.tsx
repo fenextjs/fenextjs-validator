@@ -800,7 +800,7 @@ validator.isEmail('Por favor, ingresa un correo electrónico válido');`,
             props: [
                 {
                     id: "data",
-                    type: "(data: T) => true | ErrorFenextjs",
+                    type: "(data: T, parent?: FenextjsValidatorClass) => true | ErrorFenextjs",
                     require: true,
                     description:
                         "Función que define la validación personalizada. Si la validación falla, debe retornar un error de tipo ErrorFenextjs.",
